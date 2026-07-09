@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode, forwardRef } from "react";
 import "./Card.css";
 
-export type CardTone = "green" | "yellow" | "blue" | "purple";
+export type CardTone = "green" | "yellow" | "pink" | "mint" | "purple" | "mochi";
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   tone?: CardTone;

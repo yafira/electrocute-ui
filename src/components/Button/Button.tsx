@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, forwardRef } from "react";
 import "./Button.css";
 
 export type ButtonTone = "purple" | "pink" | "yellow" | "green";
-export type ButtonVariant = "solid" | "outline" | "ghost";
+export type ButtonVariant = "solid" | "outline" | "pill";
 export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonProps

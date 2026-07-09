@@ -7,7 +7,7 @@ const meta: Meta<typeof Button> = {
   tags: ["autodocs"],
   argTypes: {
     tone: { control: "select", options: ["purple", "pink", "yellow", "green"] },
-    variant: { control: "select", options: ["solid", "outline", "ghost"] },
+    variant: { control: "select", options: ["solid", "outline", "pill"] },
     size: { control: "select", options: ["sm", "md", "lg"] },
   },
   args: {
@@ -38,7 +38,7 @@ export const ToneByVariantGrid: Story = {
   render: () => (
     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, auto)", gap: 12 }}>
       {(["purple", "pink", "yellow", "green"] as const).flatMap((tone) =>
-        (["solid", "outline", "ghost"] as const).map((variant) => (
+        (["solid", "outline", "pill"] as const).map((variant) => (
           <Button key={`${tone}-${variant}`} tone={tone} variant={variant}>
             Button
           </Button>
@@ -51,8 +51,8 @@ export const ToneByVariantGrid: Story = {
 export const PrimaryAndSecondaryCTA: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 320 }}>
-      <Button tone="purple" variant="solid" size="lg">Button</Button>
-      <Button tone="purple" variant="outline" size="sm">Button</Button>
+      <Button tone="purple" variant="pill" size="lg">Button</Button>
+      <Button tone="purple" variant="outline" size="lg">Button</Button>
     </div>
   ),
 };

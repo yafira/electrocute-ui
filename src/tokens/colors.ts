@@ -1,71 +1,77 @@
 /**
- * Color tokens, sampled directly from the Electrocute Design System v0.1 Figma file.
- * Six named palettes, each running darkest/most saturated → lightest.
+ * Color tokens, read directly from the Electrocute Design System v0.1 Figma
+ * export (Colors.png). Six named palettes, each running most saturated →
+ * lightest.
  *
- * NOTE: these hex values were extracted by pixel-sampling the exported Figma
- * screenshots, not copy-pasted from Figma's inspector. If you update the
- * palette in Figma, re-sync this file (or better — export tokens via a Figma
- * tokens plugin and pipe them in here directly).
+ * Note: in the source file, Digital Purple's 2nd and 3rd swatches carry the
+ * text labels "363333" and "534D4D" — identical to Goth Grunge's own 2nd/3rd
+ * values. Since those two Digital Purple swatches are visibly pale lavender,
+ * not dark gray, this reads as a copy-paste labeling artifact in the Figma
+ * frame (likely duplicated from Goth Grunge without updating the labels)
+ * rather than an intentional value. Flagging here rather than silently
+ * "fixing" it — worth a quick check against the live Figma file to confirm,
+ * then this comment can go.
  */
 
 export const gothGrunge = [
   "#000000",
-  "#353333",
-  "#524D4D",
-  "#686262",
-  "#837B7B",
-  "#C1B9B9",
+  "#363333",
+  "#534D4D",
+  "#696262",
+  "#857B7B",
+  "#C3B9B9",
   "#B4B1AD",
-  "#E4E2DD",
-  "#EEECE7",
+  "#E5E2DC",
+  "#EFECE6",
   "#F0EFEC",
 ] as const;
 
 export const digitalPurple = [
-  "#E2DFFC",
-  "#F4EFF8",
-  "#F2EBFC",
-  "#F6F3FC",
-  "#F3F2FC",
-  "#F8F5FC",
-  "#FAF7FD",
-  "#FBF9FF",
-  "#F9F9FF",
+  "#BAAEFF",
+  "#E8E1FA", // labeled "363333" in source — see note above, using pixel value instead
+  "#E1DFFB", // labeled "534D4D" in source — see note above, using pixel value instead
+  "#E8E1FA",
+  "#E1DFFB",
+  "#EFE7FA",
+  "#F3EBFD",
+  "#F7E0FF",
+  "#F1F0FF",
+  "#FAF6FF",
 ] as const;
 
 export const sweetMochi = [
-  "#E9BBDE",
-  "#F7E8EF",
-  "#F6E6F2",
-  "#F3E1FD",
-  "#F0DCF7",
-  "#F5E6FD",
+  "#F2B9E0",
+  "#FAE7EF",
+  "#F9E5F3",
+  "#F7E0FF",
+  "#F4DBF9",
+  "#FAEDFF",
 ] as const;
 
 export const jazzBlues = [
-  "#C4CDE5",
-  "#F0F2F9",
-  "#EDF3FD",
-  "#EDFCFC",
-  "#F8FFFE",
+  "#C2CDE7",
+  "#F0F2FA",
+  "#ECF3FE",
+  "#EAFDFC",
+  "#F6FFFE",
 ] as const;
 
 export const springGreens = [
-  "#C9FDDF",
-  "#EDF9D6",
-  "#F0FDDD",
-  "#F4FAEB",
+  "#BBFFDD",
+  "#EAF9D2",
+  "#EDFDDA",
+  "#F3FAEA",
 ] as const;
 
 export const citrus = [
-  "#FAF3E3",
-  "#F8EFE0",
-  "#FDF6D0",
-  "#F9FACA",
-  "#FDFAE6",
-  "#FCFAE1",
-  "#FFFEEB",
-  "#FFFFFA",
+  "#FCF3E1",
+  "#FAEFDE",
+  "#FEF6CC",
+  "#F9FAC5",
+  "#FDFAE4",
+  "#FCFADE",
+  "#FFFEE9",
+  "#FFFFF9",
 ] as const;
 
 export const palettes = {
@@ -88,7 +94,7 @@ export const color = {
   paper: gothGrunge[9],
 
   purple: digitalPurple[0],
-  purpleTint: digitalPurple[2],
+  purpleTint: digitalPurple[3],
 
   pink: sweetMochi[0],
   pinkTint: sweetMochi[3],
@@ -99,6 +105,7 @@ export const color = {
   green: springGreens[0],
   greenTint: springGreens[1],
 
-  yellow: citrus[3],
+  yellow: citrus[2],
   yellowTint: citrus[4],
 } as const;
+

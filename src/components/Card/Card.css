@@ -26,12 +26,16 @@
   margin-bottom: 12px;
 }
 
-.ecu-card--green { background: #EDF9D6; }
-.ecu-card--yellow { background: #FDFAE6; }
-.ecu-card--blue { background: #EDF3FD; }
-.ecu-card--purple { background: #F2EBFC; }
+.ecu-card--green { background: #EAF9D2; }
+.ecu-card--yellow { background: #FEF6CC; }
+.ecu-card--pink { background: #FAE7EF; }
+.ecu-card--mint { background: #ECF3FE; }
+.ecu-card--purple { background: #E8E1FA; }
+.ecu-card--mochi { background: #FAEDFF; }
 
-.ecu-card--hover-accent.ecu-card--green { background: #C9FDDF; }
-.ecu-card--hover-accent.ecu-card--yellow { background: #F9FACA; }
-.ecu-card--hover-accent.ecu-card--blue { background: #C4CDE5; }
-.ecu-card--hover-accent.ecu-card--purple { background: #E2DFFC; }
+.ecu-card--hover-accent.ecu-card--green { background: #BBFFDD; }
+.ecu-card--hover-accent.ecu-card--yellow { background: #FEF6CC; }
+.ecu-card--hover-accent.ecu-card--pink { background: #F2B9E0; }
+.ecu-card--hover-accent.ecu-card--mint { background: #EAFDFC; }
+.ecu-card--hover-accent.ecu-card--purple { background: #BAAEFF; }
+.ecu-card--hover-accent.ecu-card--mochi { background: #F7E0FF; }

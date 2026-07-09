@@ -6,7 +6,7 @@ const meta: Meta<typeof Card> = {
   component: Card,
   tags: ["autodocs"],
   argTypes: {
-    tone: { control: "select", options: ["green", "yellow", "blue", "purple"] },
+    tone: { control: "select", options: ["green", "yellow", "pink", "mint", "purple", "mochi"] },
   },
   args: { tone: "green" },
 };
@@ -24,8 +24,8 @@ export const Playground: Story = {
 
 export const AllTones: Story = {
   render: () => (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 160px)", gap: 16 }}>
-      {(["green", "yellow", "blue", "purple"] as const).map((tone) => (
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 160px)", gap: 16 }}>
+      {(["green", "yellow", "pink", "mint", "purple", "mochi"] as const).map((tone) => (
         <Card key={tone} tone={tone} />
       ))}
     </div>
@@ -34,8 +34,8 @@ export const AllTones: Story = {
 
 export const HoverAccentGrid: Story = {
   render: () => (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 160px)", gap: 16 }}>
-      {(["green", "yellow", "blue", "purple"] as const).map((tone) => (
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 160px)", gap: 16 }}>
+      {(["green", "yellow", "pink", "mint", "purple", "mochi"] as const).map((tone) => (
         <Card key={tone} tone={tone} hoverAccent />
       ))}
     </div>
