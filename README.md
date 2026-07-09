@@ -1,7 +1,6 @@
 # electrocute-ui
 
 [![npm version](https://img.shields.io/npm/v/electrocute-ui.svg)](https://www.npmjs.com/package/electrocute-ui)
-[![npm downloads](https://img.shields.io/npm/dm/electrocute-ui.svg)](https://www.npmjs.com/package/electrocute-ui)
 [![license](https://img.shields.io/npm/l/electrocute-ui.svg)](https://github.com/yafira/electrocute-ui/blob/main/LICENSE)
 [![Storybook](https://img.shields.io/badge/Storybook-live-ff4785?logo=storybook&logoColor=white)](https://electrocute-ui.vercel.app/storybook/)
 
@@ -18,14 +17,14 @@ The React component library and design system for [Electrocute Lab](https://elec
 
 Tone names are their own mini-palette rather than generic color words:
 
-| Tone name | Hex | Source palette |
-|---|---|---|
-| `lavender-beam` | `#BAAEFF` | Digital Purple |
-| `peony-fizz` | `#F2B9E0` | Sweet Mochi |
-| `marzipan-cloud` | `#FFFAE0` | Citrus |
-| `pistachio-swirl` | `#BBFFDD` | Spring Greens |
-| `glacier-mist` | `#ECF3FE` | Jazz Blues (Card only) |
-| `mochi-cream` | `#FAEDFF` | Sweet Mochi (Card only) |
+| Tone name         | Hex       | Source palette          |
+| ----------------- | --------- | ----------------------- |
+| `lavender-beam`   | `#BAAEFF` | Digital Purple          |
+| `peony-fizz`      | `#F2B9E0` | Sweet Mochi             |
+| `marzipan-cloud`  | `#FFFAE0` | Citrus                  |
+| `pistachio-swirl` | `#BBFFDD` | Spring Greens           |
+| `glacier-mist`    | `#ECF3FE` | Jazz Blues (Card only)  |
+| `mochi-cream`     | `#FAEDFF` | Sweet Mochi (Card only) |
 
 ## Install
 
