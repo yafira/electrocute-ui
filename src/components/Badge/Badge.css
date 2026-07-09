@@ -1,0 +1,17 @@
+.ecu-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: "IBM Plex Sans Condensed", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: #363333;
+  line-height: 1.6;
+}
+
+.ecu-badge--purple { background: #E8E1FA; }
+.ecu-badge--pink { background: #FAE7EF; }
+.ecu-badge--yellow { background: #FEF6CC; }
+.ecu-badge--green { background: #EAF9D2; }
+.ecu-badge--gray { background: #EFECE6; color: #696262; }

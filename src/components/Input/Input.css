@@ -1,0 +1,57 @@
+.ecu-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: "IBM Plex Sans Condensed", sans-serif;
+}
+
+.ecu-field__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #363333;
+}
+
+.ecu-input {
+  border-radius: 14px;
+  border: 1.5px solid #B4B1AD;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #363333;
+  background: #FFFFFF;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.ecu-input::placeholder {
+  color: #857B7B;
+}
+
+.ecu-input:focus-visible {
+  outline: none;
+  border-color: #BAAEFF;
+  box-shadow: 0 0 0 3px rgba(186, 174, 255, 0.35);
+}
+
+.ecu-input--error {
+  border-color: #E9808A;
+}
+
+.ecu-input--error:focus-visible {
+  box-shadow: 0 0 0 3px rgba(233, 128, 138, 0.25);
+}
+
+.ecu-input:disabled {
+  background: #F0EFEC;
+  color: #857B7B;
+  cursor: not-allowed;
+}
+
+.ecu-field__hint {
+  font-size: 12px;
+  color: #696262;
+}
+
+.ecu-field__error {
+  font-size: 12px;
+  color: #C0394A;
+}

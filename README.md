@@ -36,7 +36,10 @@ npm install
 npm run dev            # Storybook at localhost:6006
 npm run build           # builds the library to dist/
 npm run build-storybook # static Storybook site to storybook-static/
+npm run build-site      # builds landing page + Storybook combined into site-dist/
 ```
+
+`site/` is a small standalone React app (own Vite config: `vite.site.config.ts`) that imports components directly from `../src` — it's a live demo, not screenshots or mockups. `npm run build-site` builds it, builds Storybook, and combines them so the landing page lives at `/` and Storybook at `/storybook/` in the same deploy.
 
 ## Publishing to npm
 
