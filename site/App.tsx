@@ -51,7 +51,10 @@ export function App() {
   return (
     <div className="page">
       <header className="hero">
-        <p className="eyebrow">design system · electrocute lab</p>
+        <p className="eyebrow">
+          <img src="/inkbloom.png" alt="" className="eyebrow__mark" />
+          design system · electrocute lab
+        </p>
         <h1 className="wordmark">electrocute-ui</h1>
         <p className="tagline">
           The React component library behind Electrocute Lab and electrocute.io —

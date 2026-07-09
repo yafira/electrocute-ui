@@ -19,4 +19,7 @@ export type { BadgeProps, BadgeTone } from "./components/Badge/Badge";
 export { Avatar } from "./components/Avatar/Avatar";
 export type { AvatarProps, AvatarSize, AvatarTone } from "./components/Avatar/Avatar";
 
+export { Inkbloom } from "./components/Inkbloom/Inkbloom";
+export type { InkbloomProps, InkbloomSize } from "./components/Inkbloom/Inkbloom";
+
 export * from "./tokens";

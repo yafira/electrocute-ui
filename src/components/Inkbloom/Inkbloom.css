@@ -1,0 +1,8 @@
+.ecu-inkbloom {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.ecu-inkbloom--sm { width: 12px; height: 12px; }
+.ecu-inkbloom--md { width: 20px; height: 20px; }
+.ecu-inkbloom--lg { width: 32px; height: 32px; }
