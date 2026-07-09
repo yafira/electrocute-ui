@@ -1,0 +1,65 @@
+.ecu-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.ecu-nav__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.ecu-nav__item svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* light theme — plain, no border, sits on page background */
+.ecu-nav--light {
+  background: transparent;
+}
+.ecu-nav--light .ecu-nav__item {
+  color: #353333;
+}
+.ecu-nav--light .ecu-nav__item--active {
+  background: #E2DFFC;
+}
+
+/* outline theme — bordered pill */
+.ecu-nav--outline {
+  border: 1.5px solid #353333;
+  background: #ffffff;
+}
+.ecu-nav--outline .ecu-nav__item {
+  color: #353333;
+}
+.ecu-nav--outline .ecu-nav__item--active {
+  background: #F0EFEC;
+}
+
+/* dark theme — filled dark pill, white active circle */
+.ecu-nav--dark {
+  background: #1a1a1a;
+}
+.ecu-nav--dark .ecu-nav__item {
+  color: #ffffff;
+}
+.ecu-nav--dark .ecu-nav__item--active {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+.ecu-nav__item:focus-visible {
+  outline: 2px solid #8b8ee0;
+  outline-offset: 2px;
+}

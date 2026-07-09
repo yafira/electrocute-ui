@@ -1,0 +1,68 @@
+.ecu-button {
+  font-family: "IBM Plex Sans Condensed", sans-serif;
+  font-weight: 600;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.ecu-button:active {
+  transform: translateY(1px);
+}
+
+.ecu-button:focus-visible {
+  outline: 2px solid #8b8ee0;
+  outline-offset: 2px;
+}
+
+/* sizes — 10px = secondary button radius, 30px = primary button radius */
+.ecu-button--sm {
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 10px;
+}
+.ecu-button--md {
+  font-size: 14px;
+  padding: 9px 18px;
+  border-radius: 10px;
+}
+.ecu-button--lg {
+  font-size: 16px;
+  padding: 14px 28px;
+  border-radius: 30px;
+  width: 100%;
+}
+
+/* tone: purple (Digital Purple) */
+.ecu-button--purple.ecu-button--solid { background: #E2DFFC; color: #363333; }
+.ecu-button--purple.ecu-button--outline { background: #FFFFFF; color: #363333; border-color: #363333; }
+.ecu-button--purple.ecu-button--ghost { background: #F9F9FF; color: #363333; border-color: #E2DFFC; }
+
+/* tone: pink (Sweet Mochi) */
+.ecu-button--pink.ecu-button--solid { background: #E9BBDE; color: #363333; }
+.ecu-button--pink.ecu-button--outline { background: #FFFFFF; color: #363333; border-color: #363333; }
+.ecu-button--pink.ecu-button--ghost { background: #F7E8EF; color: #363333; border-color: #E9BBDE; }
+
+/* tone: yellow (Citrus) */
+.ecu-button--yellow.ecu-button--solid { background: #F9FACA; color: #363333; }
+.ecu-button--yellow.ecu-button--outline { background: #FFFFFF; color: #363333; border-color: #363333; }
+.ecu-button--yellow.ecu-button--ghost { background: #FDFAE6; color: #363333; border-color: #F9FACA; }
+
+/* tone: green (Spring Greens) */
+.ecu-button--green.ecu-button--solid { background: #C9FDDF; color: #363333; }
+.ecu-button--green.ecu-button--outline { background: #FFFFFF; color: #363333; border-color: #363333; }
+.ecu-button--green.ecu-button--ghost { background: #EDF9D6; color: #363333; border-color: #C9FDDF; }
+
+.ecu-button:hover {
+  box-shadow: 0 2px 0 0 rgba(54, 51, 51, 0.25);
+}
+
+.ecu-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}

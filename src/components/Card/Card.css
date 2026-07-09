@@ -1,0 +1,37 @@
+.ecu-card {
+  border-radius: 20px;
+  padding: 20px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-family: "IBM Plex Sans Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #353333;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+}
+
+.ecu-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(54, 51, 51, 0.12);
+}
+
+.ecu-card__accent {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: #ffffff;
+  margin-bottom: 12px;
+}
+
+.ecu-card--green { background: #EDF9D6; }
+.ecu-card--yellow { background: #FDFAE6; }
+.ecu-card--blue { background: #EDF3FD; }
+.ecu-card--purple { background: #F2EBFC; }
+
+.ecu-card--hover-accent.ecu-card--green { background: #C9FDDF; }
+.ecu-card--hover-accent.ecu-card--yellow { background: #F9FACA; }
+.ecu-card--hover-accent.ecu-card--blue { background: #C4CDE5; }
+.ecu-card--hover-accent.ecu-card--purple { background: #E2DFFC; }
