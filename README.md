@@ -4,8 +4,8 @@ The React component library and design system for [Electrocute Lab](https://elec
 
 ## What's in v0.1
 
-- **`Button`** — 4 tones (purple / pink / yellow / green) × 3 variants (solid / outline / ghost), plus large primary (30px radius) and secondary (10px radius) CTA sizes
-- **`Card`** — pastel-tinted content cards (20px radius) with an optional hover-accent state
+- **`Button`** — 4 tones (purple / pink / yellow / green) × 3 variants (solid / outline / pill), plus large primary (30px radius) and secondary (10px radius) CTA sizes
+- **`Card`** — 6 pastel-tinted tones (green, yellow, pink, mint, purple, mochi), 20px radius, with an optional hover-accent state
 - **`Nav`** — icon nav bar with light / outline / dark themes and active-item state
 - **`tokens`** — colors, typography scale, and border radius values sampled directly from the Figma file
 
@@ -69,7 +69,9 @@ Either way, put the resulting URL on your resume/portfolio next to this project 
 
 ## Design token sourcing note
 
-Colors, spacing, and radius values in `src/tokens/` were extracted by pixel-sampling the exported Figma screenshots rather than pulled from Figma's own inspector or a tokens plugin. If you update the palette in Figma, the values here won't auto-sync — either hand-edit `src/tokens/colors.ts` to match, or (better, for the next iteration) wire up a Figma Tokens plugin export so this file is generated rather than hand-maintained.
+Colors, spacing, and radius values in `src/tokens/` were read directly from clean Figma exports of each design system panel. One inconsistency worth checking against the live Figma file: Digital Purple's 2nd and 3rd swatch labels (`363333`, `534D4D`) are identical to Goth Grunge's own values — likely a copy-paste labeling artifact from duplicating that frame, not an intentional value. `colors.ts` uses the visually-correct pale-lavender values for those two swatches with a comment flagging the discrepancy.
+
+If the palette changes in Figma, this file won't auto-sync — either hand-edit `src/tokens/colors.ts` to match, or (better, for the next iteration) wire up a Figma Tokens plugin export so this file is generated rather than hand-maintained.
 
 Typography is still an open decision in the Figma file (three candidate type systems — Skia, IBM Plex Sans Condensed, Roboto — are shown side by side). This library defaults to IBM Plex Sans Condensed since it matches the Plex family already used across your other sites. Update `src/tokens/typography.ts` once that's finalized.
 
