@@ -1,6 +1,6 @@
 # electrocute-ui
 
-poetronics-flavored React component library — soft circuits, pastel palettes, sticker-outlined UI. The design system behind [electrocute.io](https://electrocute.io), built from the Electrocute Design System v0.1 Figma file.
+The React component library and design system for [Electrocute Lab](https://electrocute.io) — design tokens, components (Button, Card, Nav), and a live Storybook.
 
 ## What's in v0.1
 
