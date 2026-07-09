@@ -35,13 +35,13 @@ const navItems: NavItem[] = [
 ];
 
 const components = [
-  { name: "Button", tone: "purple" as const, desc: "4 tones × solid / outline / pill, plus large CTA sizes" },
-  { name: "Card", tone: "pink" as const, desc: "6 pastel tones with an optional hover-accent state" },
-  { name: "Nav", tone: "yellow" as const, desc: "Icon nav bar — light / outline / dark themes" },
-  { name: "Input", tone: "green" as const, desc: "Text field with hint and error states" },
-  { name: "Toggle", tone: "purple" as const, desc: "Light/dark switch with moon/sun icons" },
-  { name: "Badge", tone: "pink" as const, desc: "Small pill label in five tones" },
-  { name: "Avatar", tone: "yellow" as const, desc: "Image or initials, four tinted fallbacks" },
+  { name: "Button", tone: "lavender-beam" as const, desc: "4 tones × solid / outline / pill, plus large CTA sizes" },
+  { name: "Card", tone: "peony-fizz" as const, desc: "6 pastel tones with an optional hover-accent state" },
+  { name: "Nav", tone: "marzipan-cloud" as const, desc: "Icon nav bar — light / outline / dark themes" },
+  { name: "Input", tone: "pistachio-swirl" as const, desc: "Text field with hint and error states" },
+  { name: "Toggle", tone: "lavender-beam" as const, desc: "Light/dark switch with moon/sun icons" },
+  { name: "Badge", tone: "peony-fizz" as const, desc: "Small pill label in five tones" },
+  { name: "Avatar", tone: "marzipan-cloud" as const, desc: "Image or initials, four tinted fallbacks" },
 ];
 
 export function App() {
@@ -59,13 +59,13 @@ export function App() {
         </p>
         <div className="cta-row">
           <a href="/storybook/" className="cta-link">
-            <Button tone="purple" variant="pill">View Storybook</Button>
+            <Button tone="lavender-beam" variant="pill">View Storybook</Button>
           </a>
           <a href="https://www.npmjs.com/package/electrocute-ui" className="cta-link" target="_blank" rel="noreferrer">
-            <Button tone="pink" variant="outline">View on npm</Button>
+            <Button tone="peony-fizz" variant="outline">View on npm</Button>
           </a>
           <a href="https://github.com/yafira/electrocute-ui" className="cta-link" target="_blank" rel="noreferrer">
-            <Button tone="yellow" variant="outline">GitHub</Button>
+            <Button tone="marzipan-cloud" variant="outline">GitHub</Button>
           </a>
         </div>
         <code className="install-snippet">npm install electrocute-ui</code>
@@ -86,23 +86,23 @@ export function App() {
         <div className="demo-frame__grid">
           <div className="demo-frame__col">
             <div className="demo-frame__row">
-              <Button tone="purple" variant="solid">Button</Button>
-              <Button tone="pink" variant="outline">Button</Button>
-              <Button tone="green" variant="pill">Button</Button>
+              <Button tone="lavender-beam" variant="solid">Button</Button>
+              <Button tone="peony-fizz" variant="outline">Button</Button>
+              <Button tone="pistachio-swirl" variant="pill">Button</Button>
             </div>
             <Input label="Email" placeholder="you@electrocute.io" hint="Try typing — it's a real input." />
             <div className="demo-frame__row">
-              <Badge tone="purple">soft circuits</Badge>
-              <Badge tone="pink">e-textiles</Badge>
-              <Badge tone="yellow">poetronics</Badge>
-              <Badge tone="green">calm tech</Badge>
+              <Badge tone="lavender-beam">soft circuits</Badge>
+              <Badge tone="peony-fizz">e-textiles</Badge>
+              <Badge tone="marzipan-cloud">poetronics</Badge>
+              <Badge tone="pistachio-swirl">calm tech</Badge>
             </div>
           </div>
 
           <div className="demo-frame__col">
-            <Card tone="mochi" hoverAccent>
+            <Card tone="mochi-cream" hoverAccent>
               <div className="demo-frame__card-body">
-                <Avatar initials="YM" tone="purple" size="sm" />
+                <Avatar initials="YM" tone="lavender-beam" size="sm" />
                 <span>Hover this card</span>
               </div>
             </Card>

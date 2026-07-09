@@ -2,7 +2,7 @@ import { HTMLAttributes, forwardRef, useState } from "react";
 import "./Avatar.css";
 
 export type AvatarSize = "sm" | "md" | "lg";
-export type AvatarTone = "purple" | "pink" | "yellow" | "green";
+export type AvatarTone = "lavender-beam" | "peony-fizz" | "marzipan-cloud" | "pistachio-swirl";
 
 export interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
   src?: string;
@@ -18,7 +18,7 @@ export interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
  * from the Figma Cards panel.
  */
 export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
-  ({ src, alt = "", initials, size = "md", tone = "purple", className, ...rest }, ref) => {
+  ({ src, alt = "", initials, size = "md", tone = "lavender-beam", className, ...rest }, ref) => {
     const [errored, setErrored] = useState(false);
     const showImage = src && !errored;
 

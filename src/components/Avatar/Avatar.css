@@ -20,7 +20,7 @@
 .ecu-avatar--md { width: 40px; height: 40px; font-size: 14px; }
 .ecu-avatar--lg { width: 64px; height: 64px; font-size: 20px; }
 
-.ecu-avatar--purple { background: #E8E1FA; }
-.ecu-avatar--pink { background: #FAE7EF; }
-.ecu-avatar--yellow { background: #FEF6CC; }
-.ecu-avatar--green { background: #EAF9D2; }
+.ecu-avatar--lavender-beam { background: #E8E1FA; }
+.ecu-avatar--peony-fizz { background: #FAE7EF; }
+.ecu-avatar--marzipan-cloud { background: #FEF6CC; }
+.ecu-avatar--pistachio-swirl { background: #EAF9D2; }

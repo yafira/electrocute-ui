@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import "./Button.css";
 
-export type ButtonTone = "purple" | "pink" | "yellow" | "green";
+export type ButtonTone = "lavender-beam" | "peony-fizz" | "marzipan-cloud" | "pistachio-swirl";
 export type ButtonVariant = "solid" | "outline" | "pill";
 export type ButtonSize = "sm" | "md" | "lg";
 
@@ -19,7 +19,7 @@ export interface ButtonProps
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { tone = "purple", variant = "solid", size = "md", className, children, ...rest },
+    { tone = "lavender-beam", variant = "solid", size = "md", className, children, ...rest },
     ref
   ) => {
     const classes = ["ecu-button", `ecu-button--${tone}`, `ecu-button--${variant}`, `ecu-button--${size}`]

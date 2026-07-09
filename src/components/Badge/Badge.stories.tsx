@@ -6,9 +6,9 @@ const meta: Meta<typeof Badge> = {
   component: Badge,
   tags: ["autodocs"],
   argTypes: {
-    tone: { control: "select", options: ["purple", "pink", "yellow", "green", "gray"] },
+    tone: { control: "select", options: ["lavender-beam", "peony-fizz", "marzipan-cloud", "pistachio-swirl", "gray"] },
   },
-  args: { tone: "purple", children: "Badge" },
+  args: { tone: "lavender-beam", children: "Badge" },
 };
 export default meta;
 
@@ -19,7 +19,7 @@ export const Playground: Story = {};
 export const AllTones: Story = {
   render: () => (
     <div style={{ display: "flex", gap: 8 }}>
-      {(["purple", "pink", "yellow", "green", "gray"] as const).map((tone) => (
+      {(["lavender-beam", "peony-fizz", "marzipan-cloud", "pistachio-swirl", "gray"] as const).map((tone) => (
         <Badge key={tone} tone={tone}>
           Badge
         </Badge>

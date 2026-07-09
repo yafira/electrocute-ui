@@ -6,9 +6,12 @@ const meta: Meta<typeof Card> = {
   component: Card,
   tags: ["autodocs"],
   argTypes: {
-    tone: { control: "select", options: ["green", "yellow", "pink", "mint", "purple", "mochi"] },
+    tone: {
+      control: "select",
+      options: ["pistachio-swirl", "marzipan-cloud", "peony-fizz", "glacier-mist", "lavender-beam", "mochi-cream"],
+    },
   },
-  args: { tone: "green" },
+  args: { tone: "pistachio-swirl" },
 };
 export default meta;
 
@@ -25,9 +28,11 @@ export const Playground: Story = {
 export const AllTones: Story = {
   render: () => (
     <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 160px)", gap: 16 }}>
-      {(["green", "yellow", "pink", "mint", "purple", "mochi"] as const).map((tone) => (
-        <Card key={tone} tone={tone} />
-      ))}
+      {(["pistachio-swirl", "marzipan-cloud", "peony-fizz", "glacier-mist", "lavender-beam", "mochi-cream"] as const).map(
+        (tone) => (
+          <Card key={tone} tone={tone} />
+        )
+      )}
     </div>
   ),
 };
@@ -35,9 +40,11 @@ export const AllTones: Story = {
 export const HoverAccentGrid: Story = {
   render: () => (
     <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 160px)", gap: 16 }}>
-      {(["green", "yellow", "pink", "mint", "purple", "mochi"] as const).map((tone) => (
-        <Card key={tone} tone={tone} hoverAccent />
-      ))}
+      {(["pistachio-swirl", "marzipan-cloud", "peony-fizz", "glacier-mist", "lavender-beam", "mochi-cream"] as const).map(
+        (tone) => (
+          <Card key={tone} tone={tone} hoverAccent />
+        )
+      )}
     </div>
   ),
 };

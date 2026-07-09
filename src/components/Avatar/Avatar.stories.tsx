@@ -7,9 +7,9 @@ const meta: Meta<typeof Avatar> = {
   tags: ["autodocs"],
   argTypes: {
     size: { control: "select", options: ["sm", "md", "lg"] },
-    tone: { control: "select", options: ["purple", "pink", "yellow", "green"] },
+    tone: { control: "select", options: ["lavender-beam", "peony-fizz", "marzipan-cloud", "pistachio-swirl"] },
   },
-  args: { initials: "YM", size: "md", tone: "purple" },
+  args: { initials: "YM", size: "md", tone: "lavender-beam" },
 };
 export default meta;
 
@@ -30,7 +30,7 @@ export const Sizes: Story = {
 export const Tones: Story = {
   render: () => (
     <div style={{ display: "flex", gap: 12 }}>
-      {(["purple", "pink", "yellow", "green"] as const).map((tone) => (
+      {(["lavender-beam", "peony-fizz", "marzipan-cloud", "pistachio-swirl"] as const).map((tone) => (
         <Avatar key={tone} initials="YM" tone={tone} />
       ))}
     </div>

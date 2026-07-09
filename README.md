@@ -4,10 +4,23 @@ The React component library and design system for [Electrocute Lab](https://elec
 
 ## What's in v0.1
 
-- **`Button`** — 4 tones (purple / pink / yellow / green) × 3 variants (solid / outline / pill), plus large primary (30px radius) and secondary (10px radius) CTA sizes
-- **`Card`** — 6 pastel-tinted tones (green, yellow, pink, mint, purple, mochi), 20px radius, with an optional hover-accent state
+- **`Button`** — 4 tones (lavender-beam / peony-fizz / marzipan-cloud / pistachio-swirl) × 3 variants (solid / outline / pill), plus large primary (30px radius) and secondary (10px radius) CTA sizes
+- **`Card`** — 6 pastel-tinted tones (pistachio-swirl, marzipan-cloud, peony-fizz, glacier-mist, lavender-beam, mochi-cream), 20px radius, with an optional hover-accent state
 - **`Nav`** — icon nav bar with light / outline / dark themes and active-item state
 - **`tokens`** — colors, typography scale, and border radius values sampled directly from the Figma file
+
+## Palette
+
+Tone names are their own mini-palette rather than generic color words:
+
+| Tone name | Hex | Source palette |
+|---|---|---|
+| `lavender-beam` | `#BAAEFF` | Digital Purple |
+| `peony-fizz` | `#F2B9E0` | Sweet Mochi |
+| `marzipan-cloud` | `#FEF6CC` | Citrus |
+| `pistachio-swirl` | `#BBFFDD` | Spring Greens |
+| `glacier-mist` | `#ECF3FE` | Jazz Blues (Card only) |
+| `mochi-cream` | `#FAEDFF` | Sweet Mochi (Card only) |
 
 ## Install
 

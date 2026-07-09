@@ -6,13 +6,13 @@ const meta: Meta<typeof Button> = {
   component: Button,
   tags: ["autodocs"],
   argTypes: {
-    tone: { control: "select", options: ["purple", "pink", "yellow", "green"] },
+    tone: { control: "select", options: ["lavender-beam", "peony-fizz", "marzipan-cloud", "pistachio-swirl"] },
     variant: { control: "select", options: ["solid", "outline", "pill"] },
     size: { control: "select", options: ["sm", "md", "lg"] },
   },
   args: {
     children: "Button",
-    tone: "purple",
+    tone: "lavender-beam",
     variant: "solid",
     size: "md",
   },
@@ -26,10 +26,10 @@ export const Playground: Story = {};
 export const AllTones: Story = {
   render: (args) => (
     <div style={{ display: "flex", gap: 12 }}>
-      <Button {...args} tone="purple">Button</Button>
-      <Button {...args} tone="pink">Button</Button>
-      <Button {...args} tone="yellow">Button</Button>
-      <Button {...args} tone="green">Button</Button>
+      <Button {...args} tone="lavender-beam">Button</Button>
+      <Button {...args} tone="peony-fizz">Button</Button>
+      <Button {...args} tone="marzipan-cloud">Button</Button>
+      <Button {...args} tone="pistachio-swirl">Button</Button>
     </div>
   ),
 };
@@ -37,7 +37,7 @@ export const AllTones: Story = {
 export const ToneByVariantGrid: Story = {
   render: () => (
     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, auto)", gap: 12 }}>
-      {(["purple", "pink", "yellow", "green"] as const).flatMap((tone) =>
+      {(["lavender-beam", "peony-fizz", "marzipan-cloud", "pistachio-swirl"] as const).flatMap((tone) =>
         (["solid", "outline", "pill"] as const).map((variant) => (
           <Button key={`${tone}-${variant}`} tone={tone} variant={variant}>
             Button
@@ -51,8 +51,8 @@ export const ToneByVariantGrid: Story = {
 export const PrimaryAndSecondaryCTA: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 320 }}>
-      <Button tone="purple" variant="pill" size="lg">Button</Button>
-      <Button tone="purple" variant="outline" size="lg">Button</Button>
+      <Button tone="lavender-beam" variant="pill" size="lg">Button</Button>
+      <Button tone="lavender-beam" variant="outline" size="lg">Button</Button>
     </div>
   ),
 };

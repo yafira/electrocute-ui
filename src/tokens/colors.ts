@@ -85,7 +85,8 @@ export const palettes = {
 
 export type PaletteName = keyof typeof palettes;
 
-/** Semantic aliases — the tones components actually reach for. */
+/** Semantic aliases — the tones components actually reach for, named as
+ * their own cute mini-palette rather than generic color words. */
 export const color = {
   ink: gothGrunge[0],
   inkSoft: gothGrunge[2],
@@ -93,19 +94,21 @@ export const color = {
   border: gothGrunge[6],
   paper: gothGrunge[9],
 
-  purple: digitalPurple[0],
-  purpleTint: digitalPurple[3],
+  lavenderBeam: digitalPurple[0],
+  lavenderBeamTint: digitalPurple[3],
 
-  pink: sweetMochi[0],
-  pinkTint: sweetMochi[3],
+  peonyFizz: sweetMochi[0],
+  peonyFizzTint: sweetMochi[3],
 
-  blue: jazzBlues[0],
-  blueTint: jazzBlues[2],
+  glacierMist: jazzBlues[2],
+  glacierMistTint: jazzBlues[3],
 
-  green: springGreens[0],
-  greenTint: springGreens[1],
+  pistachioSwirl: springGreens[0],
+  pistachioSwirlTint: springGreens[1],
 
-  yellow: citrus[2],
-  yellowTint: citrus[4],
+  marzipanCloud: citrus[2],
+  marzipanCloudTint: citrus[4],
+
+  mochiCream: sweetMochi[5],
 } as const;
 

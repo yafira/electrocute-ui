@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode, forwardRef } from "react";
 import "./Card.css";
 
-export type CardTone = "green" | "yellow" | "pink" | "mint" | "purple" | "mochi";
+export type CardTone = "pistachio-swirl" | "marzipan-cloud" | "peony-fizz" | "glacier-mist" | "lavender-beam" | "mochi-cream";
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   tone?: CardTone;
@@ -15,7 +15,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
  * Four tones match the palette rows shown in the Figma cards panel.
  */
 export const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ tone = "green", hoverAccent = false, className, children, ...rest }, ref) => {
+  ({ tone = "pistachio-swirl", hoverAccent = false, className, children, ...rest }, ref) => {
     const classes = ["ecu-card", `ecu-card--${tone}`]
       .concat(hoverAccent ? ["ecu-card--hover-accent"] : [])
       .concat(className ? [className] : [])

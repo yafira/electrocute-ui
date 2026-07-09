@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode, forwardRef } from "react";
 import "./Badge.css";
 
-export type BadgeTone = "purple" | "pink" | "yellow" | "green" | "gray";
+export type BadgeTone = "lavender-beam" | "peony-fizz" | "marzipan-cloud" | "pistachio-swirl" | "gray";
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   tone?: BadgeTone;
@@ -13,7 +13,7 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
  * so tags stay visually consistent with the rest of the system.
  */
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ tone = "purple", className, children, ...rest }, ref) => {
+  ({ tone = "lavender-beam", className, children, ...rest }, ref) => {
     const classes = ["ecu-badge", `ecu-badge--${tone}`]
       .concat(className ? [className] : [])
       .join(" ");
