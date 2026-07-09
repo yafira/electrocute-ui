@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Card } from "./Card";
+import { Badge } from "../Badge/Badge";
 
 const meta: Meta<typeof Card> = {
   title: "Components/Card",
@@ -45,6 +46,31 @@ export const HoverAccentGrid: Story = {
           <Card key={tone} tone={tone} hoverAccent />
         )
       )}
+    </div>
+  ),
+};
+
+export const ToolCardPattern: Story = {
+  name: "Real-world: tool card (tinytinker.tools pattern)",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The title + category badge + description pattern used across tinytinker.tools' tool grid — Card composes Badge directly as a child rather than needing its own badge prop.",
+      },
+    },
+  },
+  render: () => (
+    <div style={{ width: 240 }}>
+      <Card tone="glacier-mist">
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <div style={{ fontWeight: 700, fontSize: 15 }}>resistor decoder</div>
+          <Badge tone="peony-fizz">decode</Badge>
+          <div style={{ fontWeight: 400, fontSize: 13, color: "#696262" }}>
+            color band → resistance value
+          </div>
+        </div>
+      </Card>
     </div>
   ),
 };

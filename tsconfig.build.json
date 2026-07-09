@@ -3,7 +3,8 @@
   "compilerOptions": {
     "noEmit": false,
     "emitDeclarationOnly": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "rootDir": "src"
   },
   "exclude": ["src/**/*.stories.tsx", "node_modules", "dist"]
 }

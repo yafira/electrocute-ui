@@ -106,7 +106,9 @@ export const color = {
   pistachioSwirl: springGreens[0],
   pistachioSwirlTint: springGreens[1],
 
-  marzipanCloud: citrus[2],
+  // marzipanCloud is intentionally lighter than citrus[2] (#FEF6CC) — a
+  // deliberate deviation from the sampled Figma swatch, not an error.
+  marzipanCloud: "#FFFAE0",
   marzipanCloudTint: citrus[4],
 
   mochiCream: sweetMochi[5],

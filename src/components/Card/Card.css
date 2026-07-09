@@ -27,14 +27,14 @@
 }
 
 .ecu-card--pistachio-swirl { background: #EAF9D2; }
-.ecu-card--marzipan-cloud { background: #FEF6CC; }
+.ecu-card--marzipan-cloud { background: #FFFAE0; }
 .ecu-card--peony-fizz { background: #FAE7EF; }
 .ecu-card--glacier-mist { background: #ECF3FE; }
 .ecu-card--lavender-beam { background: #E8E1FA; }
 .ecu-card--mochi-cream { background: #FAEDFF; }
 
 .ecu-card--hover-accent.ecu-card--pistachio-swirl { background: #BBFFDD; }
-.ecu-card--hover-accent.ecu-card--marzipan-cloud { background: #FEF6CC; }
+.ecu-card--hover-accent.ecu-card--marzipan-cloud { background: #FFFAE0; }
 .ecu-card--hover-accent.ecu-card--peony-fizz { background: #F2B9E0; }
 .ecu-card--hover-accent.ecu-card--glacier-mist { background: #EAFDFC; }
 .ecu-card--hover-accent.ecu-card--lavender-beam { background: #BAAEFF; }
