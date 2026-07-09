@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/electrocute-ui.svg)](https://www.npmjs.com/package/electrocute-ui)
 [![license](https://img.shields.io/npm/l/electrocute-ui.svg)](https://github.com/yafira/electrocute-ui/blob/main/LICENSE)
-[![Storybook](https://img.shields.io/badge/Storybook-live-ff4785?logo=storybook&logoColor=white)](https://electrocute-ui.vercel.app/storybook/)
+[![Storybook](https://img.shields.io/badge/Storybook-live-ff4785?logo=storybook&logoColor=white)](https://ui.electrocute.io/storybook/)
 
 The React component library and design system for [Electrocute Lab](https://electrocute.io) — design tokens, components (Button, Card, Nav), and a live Storybook.
 
