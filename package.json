@@ -1,6 +1,6 @@
 {
   "name": "electrocute-ui",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "React component library and design system for Electrocute Lab and electrocute.io — design tokens, components, and Storybook docs.",
   "type": "module",
   "main": "./dist/index.js",
