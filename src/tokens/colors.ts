@@ -86,7 +86,12 @@ export const palettes = {
 export type PaletteName = keyof typeof palettes;
 
 /** Semantic aliases — the tones components actually reach for, named as
- * their own cute mini-palette rather than generic color words. */
+ * their own cute mini-palette rather than generic color words.
+ *
+ * matchaFoam through smokeHush below come from electrocute.io's project
+ * grid — originally just `.projectCard1` through `.projectCard18` with a
+ * hex value and no name, named here the same way as everything else.
+ */
 export const color = {
   ink: gothGrunge[0],
   inkSoft: gothGrunge[2],
@@ -112,5 +117,24 @@ export const color = {
   marzipanCloudTint: citrus[4],
 
   mochiCream: sweetMochi[5],
+
+  matchaFoam: "#f3faea",
+  petalVeil: "#fff3f8",
+  vanillaGlow: "#fffee9",
+  seafoamDrop: "#f6fffe",
+  wisteriaDust: "#faf6ff",
+  cloudShoes: "#f2f8ff",
+  oatSwirl: "#fcf7ec",
+  grapeFrost: "#f4f0ff",
+  blushPowder: "#fdf1f9",
+  spearmintFizz: "#ecfff9",
+  lilacBloom: "#f5e6fd",
+  periwinkleShimmer: "#e8e6ff",
+  apricotGlaze: "#fff4e8",
+  butterPuff: "#ffffd8",
+  sageWhisper: "#f3f4ef",
+  twilightHaze: "#c0c1de",
+  mintSheen: "#ebfaf2",
+  smokeHush: "#f5f7f8",
 } as const;
 

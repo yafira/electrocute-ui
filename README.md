@@ -15,16 +15,34 @@ The React component library and design system for [Electrocute Lab](https://elec
 
 ## Palette
 
-Tone names are their own mini-palette rather than generic color words:
+Tone names are their own mini-palette rather than generic color words. `lavender-beam` through `mochi-cream` come from the Electrocute Design System Figma file; `matcha-foam` through `smoke-hush` come from electrocute.io's own project grid. All 24 live in one `color` export (`import { color } from "electrocute-ui"`) — only the first 6 are currently wired into component `tone` props.
 
-| Tone name         | Hex       | Source palette          |
-| ----------------- | --------- | ----------------------- |
-| `lavender-beam`   | `#BAAEFF` | Digital Purple          |
-| `peony-fizz`      | `#F2B9E0` | Sweet Mochi             |
-| `marzipan-cloud`  | `#FFFAE0` | Citrus                  |
-| `pistachio-swirl` | `#BBFFDD` | Spring Greens           |
-| `glacier-mist`    | `#ECF3FE` | Jazz Blues (Card only)  |
-| `mochi-cream`     | `#FAEDFF` | Sweet Mochi (Card only) |
+| Tone name | Hex | Source |
+|---|---|---|
+| `lavender-beam` | `#BAAEFF` | Digital Purple |
+| `peony-fizz` | `#F2B9E0` | Sweet Mochi |
+| `marzipan-cloud` | `#FFFAE0` | Citrus |
+| `pistachio-swirl` | `#BBFFDD` | Spring Greens |
+| `glacier-mist` | `#ECF3FE` | Jazz Blues (Card only) |
+| `mochi-cream` | `#FAEDFF` | Sweet Mochi (Card only) |
+| `matcha-foam` | `#F3FAEA` | electrocute.io project grid |
+| `petal-veil` | `#FFF3F8` | electrocute.io project grid |
+| `vanilla-glow` | `#FFFEE9` | electrocute.io project grid |
+| `seafoam-drop` | `#F6FFFE` | electrocute.io project grid |
+| `wisteria-dust` | `#FAF6FF` | electrocute.io project grid |
+| `cloud-shoes` | `#F2F8FF` | electrocute.io project grid |
+| `oat-swirl` | `#FCF7EC` | electrocute.io project grid |
+| `grape-frost` | `#F4F0FF` | electrocute.io project grid |
+| `blush-powder` | `#FDF1F9` | electrocute.io project grid |
+| `spearmint-fizz` | `#ECFFF9` | electrocute.io project grid |
+| `lilac-bloom` | `#F5E6FD` | electrocute.io project grid |
+| `periwinkle-shimmer` | `#E8E6FF` | electrocute.io project grid |
+| `apricot-glaze` | `#FFF4E8` | electrocute.io project grid |
+| `butter-puff` | `#FFFFD8` | electrocute.io project grid |
+| `sage-whisper` | `#F3F4EF` | electrocute.io project grid |
+| `twilight-haze` | `#C0C1DE` | electrocute.io project grid |
+| `mint-sheen` | `#EBFAF2` | electrocute.io project grid |
+| `smoke-hush` | `#F5F7F8` | electrocute.io project grid |
 
 ## Install
 
