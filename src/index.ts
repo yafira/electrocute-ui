@@ -1,5 +1,10 @@
 export { Button } from "./components/Button/Button";
-export type { ButtonProps, ButtonTone, ButtonVariant, ButtonSize } from "./components/Button/Button";
+export type {
+  ButtonProps,
+  ButtonTone,
+  ButtonVariant,
+  ButtonSize,
+} from "./components/Button/Button";
 
 export { Card } from "./components/Card/Card";
 export type { CardProps, CardTone } from "./components/Card/Card";
@@ -17,9 +22,22 @@ export { Badge } from "./components/Badge/Badge";
 export type { BadgeProps, BadgeTone } from "./components/Badge/Badge";
 
 export { Avatar } from "./components/Avatar/Avatar";
-export type { AvatarProps, AvatarSize, AvatarTone } from "./components/Avatar/Avatar";
+export type {
+  AvatarProps,
+  AvatarSize,
+  AvatarTone,
+} from "./components/Avatar/Avatar";
 
 export { Inkbloom } from "./components/Inkbloom/Inkbloom";
-export type { InkbloomProps, InkbloomSize } from "./components/Inkbloom/Inkbloom";
+export type {
+  InkbloomProps,
+  InkbloomSize,
+} from "./components/Inkbloom/Inkbloom";
+
+export { BloomOutline } from "./components/BloomOutline/BloomOutline";
+export type {
+  BloomOutlineProps,
+  BloomOutlineSize,
+} from "./components/BloomOutline/BloomOutline";
 
 export * from "./tokens";
