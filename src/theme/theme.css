@@ -127,9 +127,9 @@
 [data-ecu-theme="accessible"] .ecu-badge,
 [data-ecu-theme="accessible"] .ecu-card,
 [data-ecu-theme="accessible"] .ecu-avatar {
+  background: #ffffff !important;
   border: 1.5px solid #000000 !important;
   color: #000000 !important;
-  box-shadow: none !important;
 }
 
 [data-ecu-theme="accessible"] * {

@@ -4,9 +4,11 @@ import {
   Card,
   Nav,
   Input,
-  Toggle,
   Badge,
   Avatar,
+  ThemeProvider,
+  ThemeSwitcher,
+  useTheme,
   type NavItem,
 } from "../src";
 
@@ -35,19 +37,142 @@ const navItems: NavItem[] = [
 ];
 
 const components = [
-  { name: "Button", tone: "lavender-beam" as const, desc: "4 tones × solid / outline / pill, plus large CTA sizes" },
-  { name: "Card", tone: "peony-fizz" as const, desc: "6 pastel tones with an optional hover-accent state" },
-  { name: "Nav", tone: "marzipan-cloud" as const, desc: "Icon nav bar — light / outline / dark themes" },
-  { name: "Input", tone: "pistachio-swirl" as const, desc: "Text field with hint and error states" },
-  { name: "Toggle", tone: "lavender-beam" as const, desc: "Light/dark switch with moon/sun icons" },
-  { name: "Badge", tone: "peony-fizz" as const, desc: "Small pill label in five tones" },
-  { name: "Avatar", tone: "marzipan-cloud" as const, desc: "Image or initials, four tinted fallbacks" },
+  {
+    name: "Button",
+    tone: "lavender-beam" as const,
+    desc: "4 tones × solid / outline / pill, plus large CTA sizes",
+  },
+  {
+    name: "Card",
+    tone: "peony-fizz" as const,
+    desc: "6 pastel tones with an optional hover-accent state",
+  },
+  {
+    name: "Nav",
+    tone: "marzipan-cloud" as const,
+    desc: "Icon nav bar — light / outline / dark themes",
+  },
+  {
+    name: "Input",
+    tone: "pistachio-swirl" as const,
+    desc: "Text field with hint and error states",
+  },
+  {
+    name: "Toggle",
+    tone: "lavender-beam" as const,
+    desc: "Light/dark switch with moon/sun icons",
+  },
+  {
+    name: "Badge",
+    tone: "peony-fizz" as const,
+    desc: "Small pill label in five tones",
+  },
+  {
+    name: "Avatar",
+    tone: "marzipan-cloud" as const,
+    desc: "Image or initials, four tinted fallbacks",
+  },
+  {
+    name: "Inkbloom",
+    tone: "pistachio-swirl" as const,
+    desc: "Animated ink-bloom mark, three sizes",
+  },
+  {
+    name: "BloomOutline",
+    tone: "lavender-beam" as const,
+    desc: "Outline variant of the Inkbloom mark",
+  },
+  {
+    name: "ThemeSwitcher",
+    tone: "peony-fizz" as const,
+    desc: "Light / dark / reader mode control",
+  },
 ];
 
-export function App() {
-  const [dark, setDark] = useState(false);
+/**
+ * DemoFrame — lives inside its own ThemeProvider so it can preview
+ * light/dark/reader independently of the rest of the page. Replaces
+ * the old hand-rolled boolean + .demo-frame--dark class, which only
+ * covered light/dark and didn't use the real theme system at all.
+ */
+function DemoFrame() {
+  const { theme } = useTheme();
   const [active, setActive] = useState("home");
 
+  return (
+    <section className="demo-frame">
+      <div className="demo-frame__top">
+        <Nav
+          items={navItems}
+          activeId={active}
+          onSelect={setActive}
+          theme={theme === "dark" ? "dark" : "light"}
+        />
+        <ThemeSwitcherControls />
+      </div>
+
+      <div className="demo-frame__grid">
+        <div className="demo-frame__col">
+          <div className="demo-frame__row">
+            <Button tone="lavender-beam" variant="solid">
+              Button
+            </Button>
+            <Button tone="peony-fizz" variant="outline">
+              Button
+            </Button>
+            <Button tone="pistachio-swirl" variant="pill">
+              Button
+            </Button>
+          </div>
+          <Input
+            label="Email"
+            placeholder="you@electrocute.io"
+            hint="Try typing — it's a real input."
+          />
+          <div className="demo-frame__row">
+            <Badge tone="lavender-beam">soft circuits</Badge>
+            <Badge tone="peony-fizz">e-textiles</Badge>
+            <Badge tone="marzipan-cloud">poetronics</Badge>
+            <Badge tone="pistachio-swirl">calm tech</Badge>
+          </div>
+        </div>
+
+        <div className="demo-frame__col">
+          <Card tone="mochi-cream">
+            <div className="demo-frame__card-body">
+              <span className="demo-frame__avatar-halo">
+                <Avatar
+                  src="/inkbloom.png"
+                  alt="Electrocute Lab"
+                  tone="lavender-beam"
+                  size="sm"
+                />
+              </span>
+              <div>
+                <p className="demo-frame__card-title">Electrocute Lab</p>
+                <p className="demo-frame__card-sub">
+                  Design engineering · Creative Tech · NYC
+                </p>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ThemeSwitcherControls() {
+  const { theme, setTheme } = useTheme();
+  return (
+    <div className="demo-frame__toggle">
+      <span className="demo-frame__toggle-label">{theme}</span>
+      <ThemeSwitcher theme={theme} onThemeChange={setTheme} />
+    </div>
+  );
+}
+
+export function App() {
   return (
     <div className="page">
       <header className="hero">
@@ -57,61 +182,46 @@ export function App() {
         </p>
         <h1 className="wordmark">electrocute-ui</h1>
         <p className="tagline">
-          The React component library behind Electrocute Lab and electrocute.io —
-          design tokens, seven components, and a live Storybook.
+          The React component library behind Electrocute Lab and electrocute.io
+          — design tokens, ten components, light/dark/reader theming, and a live
+          Storybook.
         </p>
         <div className="cta-row">
           <a href="/storybook/" className="cta-link">
-            <Button tone="lavender-beam" variant="pill">View Storybook</Button>
+            <Button tone="lavender-beam" variant="pill">
+              View Storybook
+            </Button>
           </a>
-          <a href="https://www.npmjs.com/package/electrocute-ui" className="cta-link" target="_blank" rel="noreferrer">
-            <Button tone="peony-fizz" variant="outline">View on npm</Button>
+          <a
+            href="https://www.npmjs.com/package/electrocute-ui"
+            className="cta-link"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Button tone="peony-fizz" variant="outline">
+              View on npm
+            </Button>
           </a>
-          <a href="https://github.com/yafira/electrocute-ui" className="cta-link" target="_blank" rel="noreferrer">
-            <Button tone="marzipan-cloud" variant="outline">GitHub</Button>
+          <a
+            href="https://github.com/yafira/electrocute-ui"
+            className="cta-link"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Button tone="marzipan-cloud" variant="outline">
+              GitHub
+            </Button>
           </a>
         </div>
         <code className="install-snippet">npm install electrocute-ui</code>
       </header>
 
       {/* SIGNATURE ELEMENT: a live, working demo panel built from the real
-          components — not screenshots. The Toggle genuinely flips this
-          panel's own light/dark state. */}
-      <section className={`demo-frame ${dark ? "demo-frame--dark" : ""}`}>
-        <div className="demo-frame__top">
-          <Nav items={navItems} activeId={active} onSelect={setActive} theme={dark ? "dark" : "light"} />
-          <div className="demo-frame__toggle">
-            <span className="demo-frame__toggle-label">{dark ? "dark" : "light"}</span>
-            <Toggle checked={dark} onChange={setDark} label="Toggle light/dark preview" />
-          </div>
-        </div>
-
-        <div className="demo-frame__grid">
-          <div className="demo-frame__col">
-            <div className="demo-frame__row">
-              <Button tone="lavender-beam" variant="solid">Button</Button>
-              <Button tone="peony-fizz" variant="outline">Button</Button>
-              <Button tone="pistachio-swirl" variant="pill">Button</Button>
-            </div>
-            <Input label="Email" placeholder="you@electrocute.io" hint="Try typing — it's a real input." />
-            <div className="demo-frame__row">
-              <Badge tone="lavender-beam">soft circuits</Badge>
-              <Badge tone="peony-fizz">e-textiles</Badge>
-              <Badge tone="marzipan-cloud">poetronics</Badge>
-              <Badge tone="pistachio-swirl">calm tech</Badge>
-            </div>
-          </div>
-
-          <div className="demo-frame__col">
-            <Card tone="mochi-cream" hoverAccent>
-              <div className="demo-frame__card-body">
-                <Avatar initials="YM" tone="lavender-beam" size="sm" />
-                <span>Hover this card</span>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
+          components — not screenshots. The ThemeSwitcher genuinely flips
+          this panel's own light/dark/reader state via data-ecu-theme. */}
+      <ThemeProvider>
+        <DemoFrame />
+      </ThemeProvider>
 
       <section className="components-list">
         <h2>What's inside</h2>
@@ -128,12 +238,26 @@ export function App() {
       <footer className="footer">
         <p>
           Built from the Electrocute Design System Figma file · MIT licensed ·{" "}
-          <a href="https://electrocute.io" target="_blank" rel="noreferrer">electrocute.io</a>
+          <a href="https://electrocute.io" target="_blank" rel="noreferrer">
+            electrocute.io
+          </a>
         </p>
         <div className="footer-links">
           <a href="/storybook/">Storybook</a>
-          <a href="https://www.npmjs.com/package/electrocute-ui" target="_blank" rel="noreferrer">npm</a>
-          <a href="https://github.com/yafira/electrocute-ui" target="_blank" rel="noreferrer">GitHub</a>
+          <a
+            href="https://www.npmjs.com/package/electrocute-ui"
+            target="_blank"
+            rel="noreferrer"
+          >
+            npm
+          </a>
+          <a
+            href="https://github.com/yafira/electrocute-ui"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
         </div>
       </footer>
     </div>

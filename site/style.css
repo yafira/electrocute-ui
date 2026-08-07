@@ -1,20 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
 
 :root {
-  --paper: #F0EFEC;
+  --paper: #f0efec;
   --ink: #363333;
   --ink-soft: #696262;
   --border: #363333;
-  --purple: #BAAEFF;
-  --purple-tint: #E8E1FA;
-  --pink: #F2B9E0;
-  --pink-tint: #FAE7EF;
-  --yellow: #FFFAE0;
-  --green: #BBFFDD;
-  --green-tint: #EAF9D2;
+  --purple: #baaeff;
+  --purple-tint: #e8e1fa;
+  --pink: #f2b9e0;
+  --pink-tint: #fae7ef;
+  --yellow: #fffae0;
+  --green: #bbffdd;
+  --green-tint: #eaf9d2;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -90,7 +92,7 @@ body {
   display: inline-block;
   font-family: "IBM Plex Mono", monospace;
   font-size: 14px;
-  background: #FFFFFF;
+  background: #ffffff;
   border: 1.5px solid var(--border);
   border-radius: 10px;
   padding: 8px 14px;
@@ -98,18 +100,16 @@ body {
 
 /* ---------- signature demo frame ---------- */
 .demo-frame {
-  background: #FFFFFF;
-  border: 3px solid var(--border);
+  background: var(--ecu-surface, #ffffff);
+  color: var(--ecu-ink, #363333);
+  border: 3px solid var(--ecu-border-strong, var(--border));
   border-radius: 24px;
-  box-shadow: 8px 8px 0 0 var(--border);
+  box-shadow: 8px 8px 0 0 var(--ecu-border-strong, var(--border));
   padding: 24px;
   margin-bottom: 64px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.demo-frame--dark {
-  background: #1A1A1A;
-  color: #FFFFFF;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .demo-frame__top {
@@ -129,8 +129,8 @@ body {
   font-size: 12px;
 }
 
-.demo-frame--dark .demo-frame__toggle-label {
-  color: #FFFFFF;
+.demo-frame__toggle-label {
+  color: var(--ecu-ink-soft, var(--ink-soft));
 }
 
 .demo-frame__grid {
@@ -163,10 +163,8 @@ body {
   gap: 10px;
 }
 
-/* Input's own CSS assumes a light background; on the dark demo frame,
-   give it a subtle adjustment so it doesn't disappear */
-.demo-frame--dark .ecu-field__label {
-  color: #FFFFFF;
+.demo-frame .ecu-field__label {
+  color: var(--ecu-ink, #363333);
 }
 
 /* ---------- components list ---------- */
