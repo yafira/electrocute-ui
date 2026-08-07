@@ -1,0 +1,138 @@
+/**
+ * electrocute-ui theming layer — semantic tokens for light (default),
+ * dark, and accessible/reader modes. Structural tokens (ink/surface/
+ * border) drive real contrast; tone tokens carry each palette's hex
+ * as the light default, deepened for dark.
+ *
+ * Reader mode skips per-tone theming (unreliable for AAA contrast)
+ * in favor of a blanket monochrome override at the bottom of this
+ * file — same approach used on yafira.xyz's reader mode.
+ *
+ * Usage: apply data-ecu-theme="dark" | "accessible" to any ancestor
+ * element. Defaults to light with no attribute needed.
+ */
+
+:root,
+[data-ecu-theme="light"] {
+  /* structural */
+  --ecu-ink: #363333;
+  --ecu-ink-soft: #696262;
+  --ecu-muted: #857b7b;
+  --ecu-surface: #ffffff;
+  --ecu-surface-alt: #f0efec;
+  --ecu-border: #b4b1ad;
+  --ecu-border-strong: #363333;
+  --ecu-focus-ring: #8b8ee0;
+  --ecu-error: #e9808a;
+  --ecu-error-strong: #c0394a;
+
+  /* tone: lavender-beam (Digital Purple) */
+  --ecu-lavender-beam: #baaeff;
+  --ecu-lavender-beam-tint: #e8e1fa;
+
+  /* tone: peony-fizz (Sweet Mochi) */
+  --ecu-peony-fizz: #f2b9e0;
+  --ecu-peony-fizz-tint: #fae7ef;
+
+  /* tone: marzipan-cloud (Citrus) */
+  --ecu-marzipan-cloud: #fffae0;
+  --ecu-marzipan-cloud-tint: #fffae0;
+
+  /* tone: pistachio-swirl (Spring Greens) */
+  --ecu-pistachio-swirl: #bbffdd;
+  --ecu-pistachio-swirl-tint: #eaf9d2;
+
+  /* tone: glacier-mist (Jazz Blues) — Card-only today */
+  --ecu-glacier-mist-tint: #ecf3fe;
+  --ecu-glacier-mist-tint-hover: #eafdfc;
+
+  /* tone: mochi-cream (Sweet Mochi) — Card-only today */
+  --ecu-mochi-cream-tint: #faedff;
+
+  /* tone: gray (neutral badge/avatar) */
+  --ecu-gray-tint: #efece6;
+  --ecu-gray-ink: #696262;
+}
+
+[data-ecu-theme="dark"] {
+  /* structural */
+  --ecu-ink: #f0eef5;
+  --ecu-ink-soft: #c9c5d6;
+  --ecu-muted: #9a95ad;
+  --ecu-surface: #16151c;
+  --ecu-surface-alt: #201f2b;
+  --ecu-border: #6b5a9e;
+  --ecu-border-strong: #f0eef5;
+  --ecu-focus-ring: #b9a8e8;
+  --ecu-error: #ff9aa8;
+  --ecu-error-strong: #ff7a8c;
+
+  --ecu-lavender-beam: #baaeff;
+  --ecu-lavender-beam-tint: #2a2740;
+
+  --ecu-peony-fizz: #f2b9e0;
+  --ecu-peony-fizz-tint: #332430;
+
+  --ecu-marzipan-cloud: #ffe680;
+  --ecu-marzipan-cloud-tint: #33301a;
+
+  --ecu-pistachio-swirl: #a8e0b8;
+  --ecu-pistachio-swirl-tint: #223326;
+
+  --ecu-glacier-mist-tint: #1e2c33;
+  --ecu-glacier-mist-tint-hover: #223540;
+
+  --ecu-mochi-cream-tint: #2c2438;
+
+  --ecu-gray-tint: #29262f;
+  --ecu-gray-ink: #9a95ad;
+}
+
+/* ============================================================
+   reader / accessible mode — max legibility over palette fidelity.
+   Blanket monochrome, matching the pattern already proven out on
+   yafira.xyz's reader mode: force it broadly rather than trying to
+   theme every tone var individually for AAA contrast.
+   ============================================================ */
+
+[data-ecu-theme="accessible"] {
+  --ecu-ink: #000000;
+  --ecu-ink-soft: #1a1a1a;
+  --ecu-muted: #333333;
+  --ecu-surface: #ffffff;
+  --ecu-surface-alt: #ffffff;
+  --ecu-border: #000000;
+  --ecu-border-strong: #000000;
+  --ecu-focus-ring: #000000;
+  --ecu-error: #000000;
+  --ecu-error-strong: #000000;
+
+  --ecu-lavender-beam: #ffffff;
+  --ecu-lavender-beam-tint: #ffffff;
+  --ecu-peony-fizz: #ffffff;
+  --ecu-peony-fizz-tint: #ffffff;
+  --ecu-marzipan-cloud: #ffffff;
+  --ecu-marzipan-cloud-tint: #ffffff;
+  --ecu-pistachio-swirl: #ffffff;
+  --ecu-pistachio-swirl-tint: #ffffff;
+  --ecu-glacier-mist-tint: #ffffff;
+  --ecu-glacier-mist-tint-hover: #ffffff;
+  --ecu-mochi-cream-tint: #ffffff;
+  --ecu-gray-tint: #ffffff;
+  --ecu-gray-ink: #000000;
+}
+
+/* visible border once tone tints flatten to white in reader mode */
+[data-ecu-theme="accessible"] .ecu-button,
+[data-ecu-theme="accessible"] .ecu-badge,
+[data-ecu-theme="accessible"] .ecu-card,
+[data-ecu-theme="accessible"] .ecu-avatar {
+  border: 1.5px solid #000000 !important;
+  color: #000000 !important;
+  box-shadow: none !important;
+}
+
+[data-ecu-theme="accessible"] * {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+}

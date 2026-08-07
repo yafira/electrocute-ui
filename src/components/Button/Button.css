@@ -3,7 +3,10 @@
   font-weight: 600;
   border: 1.5px solid transparent;
   cursor: pointer;
-  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    background-color 0.12s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +18,7 @@
 }
 
 .ecu-button:focus-visible {
-  outline: 2px solid #8b8ee0;
+  outline: 2px solid var(--ecu-focus-ring, #8b8ee0);
   outline-offset: 2px;
 }
 
@@ -49,34 +52,62 @@
 }
 
 .ecu-button--outline {
-  background: #FFFFFF;
-  color: #363333;
-  border-color: #363333;
+  background: var(--ecu-surface, #ffffff);
+  color: var(--ecu-ink, #363333);
+  border-color: var(--ecu-border-strong, #363333);
 }
 
 /* tone: lavender-beam (Digital Purple) */
-.ecu-button--lavender-beam.ecu-button--solid { background: #BAAEFF; color: #363333; border-color: #363333; }
-.ecu-button--lavender-beam.ecu-button--pill { background: #BAAEFF; color: #363333; }
+.ecu-button--lavender-beam.ecu-button--solid {
+  background: var(--ecu-lavender-beam, #baaeff);
+  color: var(--ecu-ink, #363333);
+  border-color: var(--ecu-border-strong, #363333);
+}
+.ecu-button--lavender-beam.ecu-button--pill {
+  background: var(--ecu-lavender-beam, #baaeff);
+  color: var(--ecu-ink, #363333);
+}
 
 /* tone: peony-fizz (Sweet Mochi) */
-.ecu-button--peony-fizz.ecu-button--solid { background: #F2B9E0; color: #363333; border-color: #363333; }
-.ecu-button--peony-fizz.ecu-button--pill { background: #F2B9E0; color: #363333; }
+.ecu-button--peony-fizz.ecu-button--solid {
+  background: var(--ecu-peony-fizz, #f2b9e0);
+  color: var(--ecu-ink, #363333);
+  border-color: var(--ecu-border-strong, #363333);
+}
+.ecu-button--peony-fizz.ecu-button--pill {
+  background: var(--ecu-peony-fizz, #f2b9e0);
+  color: var(--ecu-ink, #363333);
+}
 
 /* tone: marzipan-cloud (Citrus) */
-.ecu-button--marzipan-cloud.ecu-button--solid { background: #FFFAE0; color: #363333; border-color: #363333; }
-.ecu-button--marzipan-cloud.ecu-button--pill { background: #FFFAE0; color: #363333; }
+.ecu-button--marzipan-cloud.ecu-button--solid {
+  background: var(--ecu-marzipan-cloud, #fffae0);
+  color: var(--ecu-ink, #363333);
+  border-color: var(--ecu-border-strong, #363333);
+}
+.ecu-button--marzipan-cloud.ecu-button--pill {
+  background: var(--ecu-marzipan-cloud, #fffae0);
+  color: var(--ecu-ink, #363333);
+}
 
 /* tone: pistachio-swirl (Spring Greens) */
-.ecu-button--pistachio-swirl.ecu-button--solid { background: #BBFFDD; color: #363333; border-color: #363333; }
-.ecu-button--pistachio-swirl.ecu-button--pill { background: #BBFFDD; color: #363333; }
+.ecu-button--pistachio-swirl.ecu-button--solid {
+  background: var(--ecu-pistachio-swirl, #bbffdd);
+  color: var(--ecu-ink, #363333);
+  border-color: var(--ecu-border-strong, #363333);
+}
+.ecu-button--pistachio-swirl.ecu-button--pill {
+  background: var(--ecu-pistachio-swirl, #bbffdd);
+  color: var(--ecu-ink, #363333);
+}
 
 /* large CTA tones — primary (solid periwinkle pill) and secondary (white bordered pill) */
 .ecu-button--lg.ecu-button--outline {
-  background: #FFFFFF;
-  border-color: #363333;
+  background: var(--ecu-surface, #ffffff);
+  border-color: var(--ecu-border-strong, #363333);
 }
 .ecu-button--lg.ecu-button--pill.ecu-button--lavender-beam {
-  background: #C2CDE7;
+  background: #c2cde7;
 }
 
 .ecu-button:hover {
@@ -88,4 +119,3 @@
   cursor: not-allowed;
   box-shadow: none;
 }
-

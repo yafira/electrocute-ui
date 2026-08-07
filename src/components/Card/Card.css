@@ -8,8 +8,10 @@
   font-family: "IBM Plex Sans Condensed", sans-serif;
   font-size: 13px;
   font-weight: 600;
-  color: #353333;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  color: var(--ecu-ink, #353333);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
   position: relative;
 }
 
@@ -22,20 +24,44 @@
   width: 28px;
   height: 28px;
   border-radius: 999px;
-  background: #ffffff;
+  background: var(--ecu-surface, #ffffff);
   margin-bottom: 12px;
 }
 
-.ecu-card--pistachio-swirl { background: #EAF9D2; }
-.ecu-card--marzipan-cloud { background: #FFFAE0; }
-.ecu-card--peony-fizz { background: #FAE7EF; }
-.ecu-card--glacier-mist { background: #ECF3FE; }
-.ecu-card--lavender-beam { background: #E8E1FA; }
-.ecu-card--mochi-cream { background: #FAEDFF; }
+.ecu-card--pistachio-swirl {
+  background: var(--ecu-pistachio-swirl-tint, #eaf9d2);
+}
+.ecu-card--marzipan-cloud {
+  background: var(--ecu-marzipan-cloud-tint, #fffae0);
+}
+.ecu-card--peony-fizz {
+  background: var(--ecu-peony-fizz-tint, #fae7ef);
+}
+.ecu-card--glacier-mist {
+  background: var(--ecu-glacier-mist-tint, #ecf3fe);
+}
+.ecu-card--lavender-beam {
+  background: var(--ecu-lavender-beam-tint, #e8e1fa);
+}
+.ecu-card--mochi-cream {
+  background: var(--ecu-mochi-cream-tint, #faedff);
+}
 
-.ecu-card--hover-accent.ecu-card--pistachio-swirl { background: #BBFFDD; }
-.ecu-card--hover-accent.ecu-card--marzipan-cloud { background: #FFFAE0; }
-.ecu-card--hover-accent.ecu-card--peony-fizz { background: #F2B9E0; }
-.ecu-card--hover-accent.ecu-card--glacier-mist { background: #EAFDFC; }
-.ecu-card--hover-accent.ecu-card--lavender-beam { background: #BAAEFF; }
-.ecu-card--hover-accent.ecu-card--mochi-cream { background: #F7E0FF; }
+.ecu-card--hover-accent.ecu-card--pistachio-swirl {
+  background: var(--ecu-pistachio-swirl, #bbffdd);
+}
+.ecu-card--hover-accent.ecu-card--marzipan-cloud {
+  background: var(--ecu-marzipan-cloud, #fffae0);
+}
+.ecu-card--hover-accent.ecu-card--peony-fizz {
+  background: var(--ecu-peony-fizz, #f2b9e0);
+}
+.ecu-card--hover-accent.ecu-card--glacier-mist {
+  background: var(--ecu-glacier-mist-tint-hover, #eafdfc);
+}
+.ecu-card--hover-accent.ecu-card--lavender-beam {
+  background: var(--ecu-lavender-beam, #baaeff);
+}
+.ecu-card--hover-accent.ecu-card--mochi-cream {
+  background: #f7e0ff;
+}

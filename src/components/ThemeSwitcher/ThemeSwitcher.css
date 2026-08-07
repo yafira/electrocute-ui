@@ -1,0 +1,45 @@
+.ecu-theme-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1.5px solid var(--ecu-border, #b4b1ad);
+  background: var(--ecu-surface, #ffffff);
+}
+
+.ecu-theme-switcher__option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--ecu-ink-soft, #696262);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.ecu-theme-switcher__option:hover {
+  color: var(--ecu-ink, #363333);
+}
+
+.ecu-theme-switcher__option--active {
+  background: var(--ecu-lavender-beam-tint, #e8e1fa);
+  color: var(--ecu-ink, #363333);
+}
+
+.ecu-theme-switcher__option:focus-visible {
+  outline: 2px solid var(--ecu-focus-ring, #8b8ee0);
+  outline-offset: 2px;
+}
+
+[data-ecu-theme="accessible"] .ecu-theme-switcher__option--active {
+  background: #000000 !important;
+  color: #ffffff !important;
+}

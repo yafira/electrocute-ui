@@ -40,4 +40,11 @@ export type {
   BloomOutlineSize,
 } from "./components/BloomOutline/BloomOutline";
 
+export { ThemeSwitcher } from "./components/ThemeSwitcher/ThemeSwitcher";
+export type { ThemeSwitcherProps } from "./components/ThemeSwitcher/ThemeSwitcher";
+
+export { ThemeProvider, useTheme } from "./theme/ThemeProvider";
+export type { EcuTheme, ThemeProviderProps } from "./theme/ThemeProvider";
+import "./theme/theme.css";
+
 export * from "./tokens";

@@ -11,38 +11,67 @@ The React component library and design system for [Electrocute Lab](https://elec
 - **`Button`** — 4 tones (lavender-beam / peony-fizz / marzipan-cloud / pistachio-swirl) × 3 variants (solid / outline / pill), plus large primary (30px radius) and secondary (10px radius) CTA sizes
 - **`Card`** — 6 pastel-tinted tones (pistachio-swirl, marzipan-cloud, peony-fizz, glacier-mist, lavender-beam, mochi-cream), 20px radius, with an optional hover-accent state
 - **`Nav`** — icon nav bar with light / outline / dark themes and active-item state
+- **`ThemeProvider` / `useTheme` / `ThemeSwitcher`** — light, dark, and reader (accessible/high-contrast) modes, driven by `data-ecu-theme` and CSS custom properties. `Button`, `Card`, and `Badge` are retrofitted to theme automatically
 - **`tokens`** — colors, typography scale, and border radius values sampled directly from the Figma file
+
+## Theming
+
+```tsx
+import { ThemeProvider, ThemeSwitcher, useTheme, Button } from "electrocute-ui";
+
+function App() {
+  return (
+    <ThemeProvider>
+      <Controls />
+    </ThemeProvider>
+  );
+}
+
+function Controls() {
+  const { theme, setTheme } = useTheme();
+  return (
+    <>
+      <ThemeSwitcher theme={theme} onThemeChange={setTheme} />
+      <Button tone="lavender-beam">Themed button</Button>
+    </>
+  );
+}
+```
+
+`ThemeProvider` defaults to the system color-scheme preference and persists the person's explicit choice to localStorage. Pass `target="document"` to apply `data-ecu-theme` to `<html>` instead of a wrapper div, if you're theming a whole app rather than an embedded widget.
+
+Reader mode (`theme="accessible"`) is a deliberately blunt, high-contrast override — black text, white surfaces, visible borders — rather than a themed variant of the pastel palette. It's meant for genuine accessibility needs, not just a third color scheme.
 
 ## Palette
 
 Tone names are their own mini-palette rather than generic color words. `lavender-beam` through `mochi-cream` come from the Electrocute Design System Figma file; `matcha-foam` through `smoke-hush` come from electrocute.io's own project grid. All 24 live in one `color` export (`import { color } from "electrocute-ui"`) — only the first 6 are currently wired into component `tone` props.
 
-| Tone name | Hex | Source |
-|---|---|---|
-| `lavender-beam` | `#BAAEFF` | Digital Purple |
-| `peony-fizz` | `#F2B9E0` | Sweet Mochi |
-| `marzipan-cloud` | `#FFFAE0` | Citrus |
-| `pistachio-swirl` | `#BBFFDD` | Spring Greens |
-| `glacier-mist` | `#ECF3FE` | Jazz Blues (Card only) |
-| `mochi-cream` | `#FAEDFF` | Sweet Mochi (Card only) |
-| `matcha-foam` | `#F3FAEA` | electrocute.io project grid |
-| `petal-veil` | `#FFF3F8` | electrocute.io project grid |
-| `vanilla-glow` | `#FFFEE9` | electrocute.io project grid |
-| `seafoam-drop` | `#F6FFFE` | electrocute.io project grid |
-| `wisteria-dust` | `#FAF6FF` | electrocute.io project grid |
-| `cloud-shoes` | `#F2F8FF` | electrocute.io project grid |
-| `oat-swirl` | `#FCF7EC` | electrocute.io project grid |
-| `grape-frost` | `#F4F0FF` | electrocute.io project grid |
-| `blush-powder` | `#FDF1F9` | electrocute.io project grid |
-| `spearmint-fizz` | `#ECFFF9` | electrocute.io project grid |
-| `lilac-bloom` | `#F5E6FD` | electrocute.io project grid |
+| Tone name            | Hex       | Source                      |
+| -------------------- | --------- | --------------------------- |
+| `lavender-beam`      | `#BAAEFF` | Digital Purple              |
+| `peony-fizz`         | `#F2B9E0` | Sweet Mochi                 |
+| `marzipan-cloud`     | `#FFFAE0` | Citrus                      |
+| `pistachio-swirl`    | `#BBFFDD` | Spring Greens               |
+| `glacier-mist`       | `#ECF3FE` | Jazz Blues (Card only)      |
+| `mochi-cream`        | `#FAEDFF` | Sweet Mochi (Card only)     |
+| `matcha-foam`        | `#F3FAEA` | electrocute.io project grid |
+| `petal-veil`         | `#FFF3F8` | electrocute.io project grid |
+| `vanilla-glow`       | `#FFFEE9` | electrocute.io project grid |
+| `seafoam-drop`       | `#F6FFFE` | electrocute.io project grid |
+| `wisteria-dust`      | `#FAF6FF` | electrocute.io project grid |
+| `cloud-shoes`        | `#F2F8FF` | electrocute.io project grid |
+| `oat-swirl`          | `#FCF7EC` | electrocute.io project grid |
+| `grape-frost`        | `#F4F0FF` | electrocute.io project grid |
+| `blush-powder`       | `#FDF1F9` | electrocute.io project grid |
+| `spearmint-fizz`     | `#ECFFF9` | electrocute.io project grid |
+| `lilac-bloom`        | `#F5E6FD` | electrocute.io project grid |
 | `periwinkle-shimmer` | `#E8E6FF` | electrocute.io project grid |
-| `apricot-glaze` | `#FFF4E8` | electrocute.io project grid |
-| `butter-puff` | `#FFFFD8` | electrocute.io project grid |
-| `sage-whisper` | `#F3F4EF` | electrocute.io project grid |
-| `twilight-haze` | `#C0C1DE` | electrocute.io project grid |
-| `mint-sheen` | `#EBFAF2` | electrocute.io project grid |
-| `smoke-hush` | `#F5F7F8` | electrocute.io project grid |
+| `apricot-glaze`      | `#FFF4E8` | electrocute.io project grid |
+| `butter-puff`        | `#FFFFD8` | electrocute.io project grid |
+| `sage-whisper`       | `#F3F4EF` | electrocute.io project grid |
+| `twilight-haze`      | `#C0C1DE` | electrocute.io project grid |
+| `mint-sheen`         | `#EBFAF2` | electrocute.io project grid |
+| `smoke-hush`         | `#F5F7F8` | electrocute.io project grid |
 
 ## Install
 
@@ -57,7 +86,7 @@ import { Button, Card, Nav, color } from "electrocute-ui";
 
 function App() {
   return (
-    <Button tone="purple" variant="solid" size="lg">
+    <Button tone="lavender-beam" variant="solid" size="lg">
       Get started
     </Button>
   );
@@ -75,6 +104,8 @@ npm run build-site      # builds landing page + Storybook combined into site-dis
 ```
 
 `site/` is a small standalone React app (own Vite config: `vite.site.config.ts`) that imports components directly from `../src` — it's a live demo, not screenshots or mockups. `npm run build-site` builds it, builds Storybook, and combines them so the landing page lives at `/` and Storybook at `/storybook/` in the same deploy.
+
+Storybook's toolbar has a "Theme" dropdown (paintbrush icon) to preview any component in light, dark, or reader mode without wiring up `ThemeProvider` yourself.
 
 ## Publishing to npm
 
@@ -115,7 +146,7 @@ Typography is still an open decision in the Figma file (three candidate type sys
 
 ## Roadmap ideas
 
-- Input / form field component (14px radius per the Border Radius spec)
-- Dark mode token set (a `gothGrunge`-forward palette already exists for this)
+- Retrofit remaining components (`Avatar`, `Input`, `Inkbloom`, `BloomOutline`) to the theme token system — currently only `Button`, `Card`, and `Badge` read `data-ecu-theme`
+- `Nav`'s `light`/`outline`/`dark` prop predates the theme system and doesn't read `data-ecu-theme` yet — worth deciding whether it should switch to context-driven theming instead of its own prop
 - Figma Tokens plugin sync so `tokens/` is generated, not hand-sampled
 - Icon set as its own package or subpath export
