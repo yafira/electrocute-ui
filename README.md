@@ -6,7 +6,7 @@
 
 The React component library and design system for [Electrocute Lab](https://electrocute.io) — design tokens, components (Button, Card, Nav), and a live Storybook.
 
-## What's in v0.1
+## What's in v0.4
 
 - **`Button`** — 4 tones (lavender-beam / peony-fizz / marzipan-cloud / pistachio-swirl) × 3 variants (solid / outline / pill), plus large primary (30px radius) and secondary (10px radius) CTA sizes
 - **`Card`** — 6 pastel-tinted tones (pistachio-swirl, marzipan-cloud, peony-fizz, glacier-mist, lavender-beam, mochi-cream), 20px radius, with an optional hover-accent state
