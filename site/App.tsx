@@ -151,7 +151,7 @@ function DemoFrame() {
               <div>
                 <p className="demo-frame__card-title">Electrocute Lab</p>
                 <p className="demo-frame__card-sub">
-                  Design engineering · Creative Tech · NYC
+                  design engineering · creative tech · NYC
                 </p>
               </div>
             </div>
