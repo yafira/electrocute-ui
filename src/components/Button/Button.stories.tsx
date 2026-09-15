@@ -6,13 +6,13 @@ const meta: Meta<typeof Button> = {
   component: Button,
   tags: ["autodocs"],
   argTypes: {
-    tone: { control: "select", options: ["lavender-beam", "peony-fizz", "marzipan-cloud", "pistachio-swirl"] },
-    variant: { control: "select", options: ["solid", "outline", "pill"] },
+    intent: { control: "select", options: ["primary", "neutral", "success", "danger"] },
+    variant: { control: "select", options: ["solid", "outline", "pill", "ghost"] },
     size: { control: "select", options: ["sm", "md", "lg"] },
   },
   args: {
     children: "Button",
-    tone: "lavender-beam",
+    intent: "primary",
     variant: "solid",
     size: "md",
   },
@@ -23,23 +23,31 @@ type Story = StoryObj<typeof Button>;
 
 export const Playground: Story = {};
 
-export const AllTones: Story = {
+export const Loading: Story = {
+  args: { loading: true },
+};
+
+export const Disabled: Story = {
+  args: { disabled: true },
+};
+
+export const AllIntents: Story = {
   render: (args) => (
     <div style={{ display: "flex", gap: 12 }}>
-      <Button {...args} tone="lavender-beam">Button</Button>
-      <Button {...args} tone="peony-fizz">Button</Button>
-      <Button {...args} tone="marzipan-cloud">Button</Button>
-      <Button {...args} tone="pistachio-swirl">Button</Button>
+      <Button {...args} intent="primary">Button</Button>
+      <Button {...args} intent="neutral">Button</Button>
+      <Button {...args} intent="success">Button</Button>
+      <Button {...args} intent="danger">Button</Button>
     </div>
   ),
 };
 
-export const ToneByVariantGrid: Story = {
+export const IntentByVariantGrid: Story = {
   render: () => (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, auto)", gap: 12 }}>
-      {(["lavender-beam", "peony-fizz", "marzipan-cloud", "pistachio-swirl"] as const).flatMap((tone) =>
-        (["solid", "outline", "pill"] as const).map((variant) => (
-          <Button key={`${tone}-${variant}`} tone={tone} variant={variant}>
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(4, auto)", gap: 12 }}>
+      {(["primary", "neutral", "success", "danger"] as const).flatMap((intent) =>
+        (["solid", "outline", "pill", "ghost"] as const).map((variant) => (
+          <Button key={`${intent}-${variant}`} intent={intent} variant={variant}>
             Button
           </Button>
         ))
@@ -51,8 +59,8 @@ export const ToneByVariantGrid: Story = {
 export const PrimaryAndSecondaryCTA: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 320 }}>
-      <Button tone="lavender-beam" variant="pill" size="lg">Button</Button>
-      <Button tone="lavender-beam" variant="outline" size="lg">Button</Button>
+      <Button intent="primary" variant="pill" size="lg">Button</Button>
+      <Button intent="primary" variant="outline" size="lg">Button</Button>
     </div>
   ),
 };

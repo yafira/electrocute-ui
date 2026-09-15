@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ThemeSwitcher } from "./ThemeSwitcher";
-import { EcuTheme } from "../../theme/ThemeProvider";
+import type { ThemeName } from "../../tokens/colors";
 import { Button } from "../Button/Button";
 import { Card } from "../Card/Card";
 import { Badge } from "../Badge/Badge";
@@ -17,7 +17,7 @@ type Story = StoryObj<typeof ThemeSwitcher>;
 
 export const Playground: Story = {
   render: () => {
-    const [theme, setTheme] = useState<EcuTheme>("light");
+    const [theme, setTheme] = useState<ThemeName>("light");
     return (
       <div data-ecu-theme={theme} style={{ padding: 24 }}>
         <ThemeSwitcher theme={theme} onThemeChange={setTheme} />
@@ -26,14 +26,12 @@ export const Playground: Story = {
   },
 };
 
-// pairs the switcher with the three retrofitted components so the
-// token wiring is visible directly, not just trusted from the build.
-// Note: the Storybook canvas background is separately controlled by
-// the global "Theme" toolbar (see .storybook/preview.tsx) — this
-// story's own switcher only affects the box below it.
+// pairs the switcher with three retrofitted components so the token wiring
+// is visible directly. Uses the v0.5 intent/surface API, not the deprecated
+// tone prop.
 export const WithComponents: Story = {
   render: () => {
-    const [theme, setTheme] = useState<EcuTheme>("light");
+    const [theme, setTheme] = useState<ThemeName>("light");
     return (
       <div
         data-ecu-theme={theme}
@@ -48,24 +46,24 @@ export const WithComponents: Story = {
         <ThemeSwitcher theme={theme} onThemeChange={setTheme} />
 
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-          <Button tone="lavender-beam" variant="solid">
+          <Button intent="primary" variant="solid">
             Solid
           </Button>
-          <Button tone="peony-fizz" variant="pill">
+          <Button intent="success" variant="pill">
             Pill
           </Button>
           <Button variant="outline">Outline</Button>
         </div>
 
         <div style={{ display: "flex", gap: 8 }}>
-          <Badge tone="lavender-beam">design</Badge>
-          <Badge tone="pistachio-swirl">code</Badge>
-          <Badge tone="gray">hardware</Badge>
+          <Badge intent="info">design</Badge>
+          <Badge intent="success">code</Badge>
+          <Badge intent="neutral">hardware</Badge>
         </div>
 
         <div style={{ display: "flex", gap: 16 }}>
-          <Card tone="lavender-beam">electrocute-ui</Card>
-          <Card tone="pistachio-swirl">Soft Components</Card>
+          <Card surface="accent">electrocute-ui</Card>
+          <Card surface="sunken">Soft Components</Card>
         </div>
       </div>
     );

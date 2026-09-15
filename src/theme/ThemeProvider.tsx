@@ -1,121 +1,123 @@
-import {
-  createContext,
-  ReactNode,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import "./theme.css";
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { tone, type ThemeName } from '../tokens/colors'
+import './theme.css'
 
-export type EcuTheme = "light" | "dark" | "accessible";
-
-const STORAGE_KEY = "ecu-theme";
-const THEMES: EcuTheme[] = ["light", "dark", "accessible"];
+const STORAGE_KEY = 'ecu-theme'
 
 interface ThemeContextValue {
-  theme: EcuTheme;
-  setTheme: (theme: EcuTheme) => void;
-  cycleTheme: () => void;
+  theme: ThemeName
+  setTheme: (t: ThemeName) => void
 }
 
-const ThemeContext = createContext<ThemeContextValue | null>(null);
+const ThemeContext = createContext<ThemeContextValue | null>(null)
 
-function getSystemDefault(): EcuTheme {
-  if (typeof window === "undefined") return "light";
-  return window.matchMedia?.("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+export function useTheme(): ThemeContextValue {
+  const ctx = useContext(ThemeContext)
+  if (!ctx) throw new Error('useTheme must be used inside <ThemeProvider>')
+  return ctx
+}
+
+function systemTheme(): ThemeName {
+  if (typeof window === 'undefined' || !window.matchMedia) return 'light'
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+function storedTheme(): ThemeName | null {
+  if (typeof window === 'undefined') return null
+  const v = window.localStorage.getItem(STORAGE_KEY)
+  return v === 'light' || v === 'dark' || v === 'accessible' ? v : null
 }
 
 export interface ThemeProviderProps {
-  children: ReactNode;
-  /** Controlled theme value. Omit to let ThemeProvider manage its own state. */
-  theme?: EcuTheme;
-  onThemeChange?: (theme: EcuTheme) => void;
-  /**
-   * "self" (default) sets data-ecu-theme on this component's wrapper
-   * div. "document" sets it on document.documentElement instead.
-   */
-  target?: "self" | "document";
-  /** Skip localStorage persistence — useful in controlled mode. */
-  disablePersistence?: boolean;
+  children: React.ReactNode
+  /** 'document' sets data-ecu-theme on <html>; 'wrapper' (default) scopes to a div. */
+  target?: 'wrapper' | 'document'
+  defaultTheme?: ThemeName
 }
 
-/**
- * ThemeProvider — drives light/dark/accessible mode. Defaults to
- * system color-scheme preference, then remembers the person's choice
- * in localStorage. Works uncontrolled or controlled (pass `theme` +
- * `onThemeChange`).
- */
-export function ThemeProvider({
-  children,
-  theme: controlledTheme,
-  onThemeChange,
-  target = "self",
-  disablePersistence = false,
-}: ThemeProviderProps) {
-  const [internalTheme, setInternalTheme] = useState<EcuTheme>(() => {
-    if (controlledTheme) return controlledTheme;
-    if (!disablePersistence && typeof window !== "undefined") {
-      const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (stored && THEMES.includes(stored as EcuTheme)) {
-        return stored as EcuTheme;
-      }
-    }
-    return getSystemDefault();
-  });
+export function ThemeProvider({ children, target = 'wrapper', defaultTheme }: ThemeProviderProps) {
+  const [theme, setThemeState] = useState<ThemeName>(() => storedTheme() ?? defaultTheme ?? systemTheme())
 
-  const theme = controlledTheme ?? internalTheme;
-
-  const setTheme = useCallback(
-    (next: EcuTheme) => {
-      if (!controlledTheme) {
-        setInternalTheme(next);
-        if (!disablePersistence && typeof window !== "undefined") {
-          window.localStorage.setItem(STORAGE_KEY, next);
-        }
-      }
-      onThemeChange?.(next);
-    },
-    [controlledTheme, disablePersistence, onThemeChange],
-  );
-
-  const cycleTheme = useCallback(() => {
-    const nextIndex = (THEMES.indexOf(theme) + 1) % THEMES.length;
-    setTheme(THEMES[nextIndex]);
-  }, [theme, setTheme]);
+  const setTheme = useCallback((t: ThemeName) => {
+    setThemeState(t)
+    try { window.localStorage.setItem(STORAGE_KEY, t) } catch { /* private mode */ }
+  }, [])
 
   useEffect(() => {
-    if (target === "document" && typeof document !== "undefined") {
-      document.documentElement.setAttribute("data-ecu-theme", theme);
-    }
-  }, [theme, target]);
+    if (target !== 'document') return
+    const root = document.documentElement
+    const prev = root.getAttribute('data-ecu-theme')
+    root.setAttribute('data-ecu-theme', theme)
+    return () => { prev ? root.setAttribute('data-ecu-theme', prev) : root.removeAttribute('data-ecu-theme') }
+  }, [theme, target])
 
-  const value = useMemo(
-    () => ({ theme, setTheme, cycleTheme }),
-    [theme, setTheme, cycleTheme],
-  );
+  // Follow the OS only while the user hasn't made an explicit choice.
+  useEffect(() => {
+    if (storedTheme() || typeof window === 'undefined' || !window.matchMedia) return
+    const mq = window.matchMedia('(prefers-color-scheme: dark)')
+    const onChange = () => setThemeState(mq.matches ? 'dark' : 'light')
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
 
-  if (target === "document") {
-    return (
-      <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-    );
-  }
+  // Expose the 24 tones as vars too, so `tone` props resolve in CSS not JS.
+  const toneVars = useMemo(() => {
+    const out: Record<string, string> = {}
+    for (const [k, v] of Object.entries(tone)) out[`--ecu-tone-${k}`] = v
+    return out as React.CSSProperties
+  }, [])
+
+  const value = useMemo(() => ({ theme, setTheme }), [theme, setTheme])
 
   return (
     <ThemeContext.Provider value={value}>
-      <div data-ecu-theme={theme}>{children}</div>
+      {target === 'document' ? (
+        <div style={toneVars}>{children}</div>
+      ) : (
+        <div data-ecu-theme={theme} style={{ ...toneVars, background: 'var(--ecu-canvas)', color: 'var(--ecu-ink)' }}>
+          {children}
+        </div>
+      )}
     </ThemeContext.Provider>
-  );
+  )
 }
 
-/** useTheme — read/update the current theme from within a ThemeProvider. */
-export function useTheme(): ThemeContextValue {
-  const ctx = useContext(ThemeContext);
-  if (!ctx) {
-    throw new Error("useTheme must be used within a <ThemeProvider>");
-  }
-  return ctx;
+const LABELS: Record<ThemeName, string> = { light: 'Light', dark: 'Dark', accessible: 'Reader' }
+
+export interface ThemeSwitcherProps {
+  theme?: ThemeName
+  onThemeChange?: (t: ThemeName) => void
+}
+
+/** v0.4 took theme/onThemeChange as props; v0.5 falls back to context. */
+export function ThemeSwitcher({ theme: themeProp, onThemeChange }: ThemeSwitcherProps) {
+  const ctx = useContext(ThemeContext)
+  const theme = themeProp ?? ctx?.theme ?? 'light'
+  const set = onThemeChange ?? ctx?.setTheme ?? (() => {})
+
+  return (
+    <div
+      role="radiogroup"
+      aria-label="Color theme"
+      style={{ display: 'inline-flex', gap: 4, padding: 4, borderRadius: 999, background: 'var(--ecu-surface-sunken)' }}
+    >
+      {(Object.keys(LABELS) as ThemeName[]).map((t) => (
+        <button
+          key={t}
+          type="button"
+          role="radio"
+          aria-checked={theme === t}
+          onClick={() => set(t)}
+          style={{
+            font: 'inherit', fontSize: 14, fontWeight: 600, padding: '9px 18px', borderRadius: 999,
+            border: 'none', cursor: 'pointer',
+            background: theme === t ? 'var(--ecu-surface)' : 'transparent',
+            color: theme === t ? 'var(--ecu-ink)' : 'var(--ecu-ink-muted)',
+          }}
+        >
+          {LABELS[t]}
+        </button>
+      ))}
+    </div>
+  )
 }

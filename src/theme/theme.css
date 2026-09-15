@@ -1,138 +1,99 @@
 /**
- * electrocute-ui theming layer — semantic tokens for light (default),
- * dark, and accessible/reader modes. Structural tokens (ink/surface/
- * border) drive real contrast; tone tokens carry each palette's hex
- * as the light default, deepened for dark.
+ * electrocute-ui — theme custom properties (v0.5)
  *
- * Reader mode skips per-tone theming (unreliable for AAA contrast)
- * in favor of a blanket monochrome override at the bottom of this
- * file — same approach used on yafira.xyz's reader mode.
- *
- * Usage: apply data-ecu-theme="dark" | "accessible" to any ancestor
- * element. Defaults to light with no attribute needed.
+ * Mirrors `roles` in tokens/colors.ts. A theme swap is one attribute change:
+ * no React re-render, and no component knows it happened.
+ * Run `npm run build:theme` to regenerate from the TS source.
  */
 
-:root,
-[data-ecu-theme="light"] {
-  /* structural */
-  --ecu-ink: #363333;
-  --ecu-ink-soft: #696262;
-  --ecu-muted: #857b7b;
+[data-ecu-theme='light'],
+:root {
+  --ecu-canvas: #faf9fb;
   --ecu-surface: #ffffff;
-  --ecu-surface-alt: #f0efec;
-  --ecu-border: #b4b1ad;
-  --ecu-border-strong: #363333;
-  --ecu-focus-ring: #8b8ee0;
-  --ecu-error: #e9808a;
-  --ecu-error-strong: #c0394a;
+  --ecu-surface-sunken: #f5f7f8;
+  --ecu-surface-accent: #faf6ff;
+  --ecu-ink: #1a1720;
+  --ecu-ink-muted: #55505e;
+  --ecu-ink-subtle: #8a8494;
+  --ecu-accent: #baaeff;
+  --ecu-accent-hover: #a79af5;
+  --ecu-accent-ink: #1a1720;
+  --ecu-line: #e6e2ec;
+  --ecu-line-strong: #1a1720;
+  --ecu-focus: #5b3fd6;
 
-  /* tone: lavender-beam (Digital Purple) */
-  --ecu-lavender-beam: #baaeff;
-  --ecu-lavender-beam-tint: #e8e1fa;
+  --ecu-success-surface: #e7fbf0; --ecu-success-ink: #0e5e3c;
+  --ecu-warning-surface: #fffae0; --ecu-warning-ink: #7a4f00;
+  --ecu-danger-surface: #ffe4ec;  --ecu-danger-ink: #a8123a;
+  --ecu-info-surface: #ecf3fe;    --ecu-info-ink: #1b4fa8;
 
-  /* tone: peony-fizz (Sweet Mochi) */
-  --ecu-peony-fizz: #f2b9e0;
-  --ecu-peony-fizz-tint: #fae7ef;
-
-  /* tone: marzipan-cloud (Citrus) */
-  --ecu-marzipan-cloud: #fffae0;
-  --ecu-marzipan-cloud-tint: #fffae0;
-
-  /* tone: pistachio-swirl (Spring Greens) */
-  --ecu-pistachio-swirl: #bbffdd;
-  --ecu-pistachio-swirl-tint: #eaf9d2;
-
-  /* tone: glacier-mist (Jazz Blues) — Card-only today */
-  --ecu-glacier-mist-tint: #ecf3fe;
-  --ecu-glacier-mist-tint-hover: #eafdfc;
-
-  /* tone: mochi-cream (Sweet Mochi) — Card-only today */
-  --ecu-mochi-cream-tint: #faedff;
-
-  /* tone: gray (neutral badge/avatar) */
-  --ecu-gray-tint: #efece6;
-  --ecu-gray-ink: #696262;
+  --ecu-disabled-surface: #edeaf2;
+  --ecu-disabled-ink: #8a8494;
 }
 
-[data-ecu-theme="dark"] {
-  /* structural */
-  --ecu-ink: #f0eef5;
-  --ecu-ink-soft: #c9c5d6;
-  --ecu-muted: #9a95ad;
-  --ecu-surface: #16151c;
-  --ecu-surface-alt: #201f2b;
-  --ecu-border: #6b5a9e;
-  --ecu-border-strong: #f0eef5;
-  --ecu-focus-ring: #b9a8e8;
-  --ecu-error: #ff9aa8;
-  --ecu-error-strong: #ff7a8c;
+[data-ecu-theme='dark'] {
+  --ecu-canvas: #141218;
+  --ecu-surface: #1e1b24;
+  --ecu-surface-sunken: #171520;
+  --ecu-surface-accent: #241f33;
+  --ecu-ink: #f4f2f8;
+  --ecu-ink-muted: #a9a3b8;
+  --ecu-ink-subtle: #7c7690;
+  --ecu-accent: #8a78f0;
+  --ecu-accent-hover: #9b8cf5;
+  --ecu-accent-ink: #0d0b12;
+  --ecu-line: #332e3f;
+  --ecu-line-strong: #4a4458;
+  --ecu-focus: #b9a9ff;
 
-  --ecu-lavender-beam: #baaeff;
-  --ecu-lavender-beam-tint: #2a2740;
+  --ecu-success-surface: #13301f; --ecu-success-ink: #7be3ae;
+  --ecu-warning-surface: #302713; --ecu-warning-ink: #f0ce7b;
+  --ecu-danger-surface: #33131f;  --ecu-danger-ink: #f79bb8;
+  --ecu-info-surface: #131f33;    --ecu-info-ink: #9bc1f7;
 
-  --ecu-peony-fizz: #f2b9e0;
-  --ecu-peony-fizz-tint: #332430;
-
-  --ecu-marzipan-cloud: #ffe680;
-  --ecu-marzipan-cloud-tint: #33301a;
-
-  --ecu-pistachio-swirl: #a8e0b8;
-  --ecu-pistachio-swirl-tint: #223326;
-
-  --ecu-glacier-mist-tint: #1e2c33;
-  --ecu-glacier-mist-tint-hover: #223540;
-
-  --ecu-mochi-cream-tint: #2c2438;
-
-  --ecu-gray-tint: #29262f;
-  --ecu-gray-ink: #9a95ad;
+  --ecu-disabled-surface: #262231;
+  --ecu-disabled-ink: #6b6580;
 }
 
-/* ============================================================
-   reader / accessible mode — max legibility over palette fidelity.
-   Blanket monochrome, matching the pattern already proven out on
-   yafira.xyz's reader mode: force it broadly rather than trying to
-   theme every tone var individually for AAA contrast.
-   ============================================================ */
-
-[data-ecu-theme="accessible"] {
+/* Reader: blunt high-contrast override. No tones appear here at all. */
+[data-ecu-theme='accessible'] {
+  --ecu-canvas: #ffffff;
+  --ecu-surface: #ffffff;
+  --ecu-surface-sunken: #f2f2f2;
+  --ecu-surface-accent: #ffffff;
   --ecu-ink: #000000;
-  --ecu-ink-soft: #1a1a1a;
-  --ecu-muted: #333333;
-  --ecu-surface: #ffffff;
-  --ecu-surface-alt: #ffffff;
-  --ecu-border: #000000;
-  --ecu-border-strong: #000000;
-  --ecu-focus-ring: #000000;
-  --ecu-error: #000000;
-  --ecu-error-strong: #000000;
+  --ecu-ink-muted: #000000;
+  --ecu-ink-subtle: #3d3d3d;
+  --ecu-accent: #000000;
+  --ecu-accent-hover: #2b2b2b;
+  --ecu-accent-ink: #ffffff;
+  --ecu-line: #000000;
+  --ecu-line-strong: #000000;
+  --ecu-focus: #000000;
 
-  --ecu-lavender-beam: #ffffff;
-  --ecu-lavender-beam-tint: #ffffff;
-  --ecu-peony-fizz: #ffffff;
-  --ecu-peony-fizz-tint: #ffffff;
-  --ecu-marzipan-cloud: #ffffff;
-  --ecu-marzipan-cloud-tint: #ffffff;
-  --ecu-pistachio-swirl: #ffffff;
-  --ecu-pistachio-swirl-tint: #ffffff;
-  --ecu-glacier-mist-tint: #ffffff;
-  --ecu-glacier-mist-tint-hover: #ffffff;
-  --ecu-mochi-cream-tint: #ffffff;
-  --ecu-gray-tint: #ffffff;
-  --ecu-gray-ink: #000000;
+  --ecu-success-surface: #ffffff; --ecu-success-ink: #00532f;
+  --ecu-warning-surface: #ffffff; --ecu-warning-ink: #5c3a00;
+  --ecu-danger-surface: #ffffff;  --ecu-danger-ink: #8a0026;
+  --ecu-info-surface: #ffffff;    --ecu-info-ink: #003c8f;
+
+  --ecu-disabled-surface: #ffffff;
+  --ecu-disabled-ink: #595959;
 }
 
-/* visible border once tone tints flatten to white in reader mode */
-[data-ecu-theme="accessible"] .ecu-button,
-[data-ecu-theme="accessible"] .ecu-badge,
-[data-ecu-theme="accessible"] .ecu-card,
-[data-ecu-theme="accessible"] .ecu-avatar {
-  background: #ffffff !important;
-  border: 1.5px solid #000000 !important;
-  color: #000000 !important;
+/* Reader mode makes every boundary explicit. */
+[data-ecu-theme='accessible'] [data-ecu-component='button'],
+[data-ecu-theme='accessible'] [data-ecu-component='card'],
+[data-ecu-theme='accessible'] [data-ecu-component='badge'],
+[data-ecu-theme='accessible'] .ecu-control {
+  border: 2px solid var(--ecu-line) !important;
 }
 
-[data-ecu-theme="accessible"] * {
-  animation-duration: 0.001ms !important;
-  transition-duration: 0.001ms !important;
+/* ONE focus treatment, library-wide. Delete any outline:none you had. */
+[data-ecu-theme] :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ecu-surface), 0 0 0 5px var(--ecu-focus);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ecu-theme] * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }

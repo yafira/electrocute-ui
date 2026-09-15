@@ -1,140 +1,163 @@
 /**
- * Color tokens, read directly from the Electrocute Design System v0.1 Figma
- * export (Colors.png). Six named palettes, each running most saturated →
- * lightest.
+ * electrocute-ui — color tokens (v0.5)
  *
- * Note: in the source file, Digital Purple's 2nd and 3rd swatches carry the
- * text labels "363333" and "534D4D" — identical to Goth Grunge's own 2nd/3rd
- * values. Since those two Digital Purple swatches are visibly pale lavender,
- * not dark gray, this reads as a copy-paste labeling artifact in the Figma
- * frame (likely duplicated from Goth Grunge without updating the labels)
- * rather than an intentional value. Flagging here rather than silently
- * "fixing" it — worth a quick check against the live Figma file to confirm,
- * then this comment can go.
+ * Three layers, in dependency order:
+ *   1. tone    — the 24 brand pastels. Decorative palette source.
+ *   2. ink / status / accent — functional ramps. NEW in v0.5.
+ *   3. roles   — semantic names, resolved per theme. The ONLY layer
+ *                components are allowed to read (via CSS custom props).
+ *
+ * Rule: nothing in src/components imports from layer 1.
+ * NOTE: ink/status/accent values are proposals — verify against Figma.
  */
 
-export const gothGrunge = [
-  "#000000",
-  "#363333",
-  "#534D4D",
-  "#696262",
-  "#857B7B",
-  "#C3B9B9",
-  "#B4B1AD",
-  "#E5E2DC",
-  "#EFECE6",
-  "#F0EFEC",
-] as const;
+export const tone = {
+  'lavender-beam': '#BAAEFF',
+  'peony-fizz': '#F2B9E0',
+  'marzipan-cloud': '#FFFAE0',
+  'pistachio-swirl': '#BBFFDD',
+  'glacier-mist': '#ECF3FE',
+  'mochi-cream': '#FAEDFF',
+  'matcha-foam': '#F3FAEA',
+  'petal-veil': '#FFF3F8',
+  'vanilla-glow': '#FFFEE9',
+  'seafoam-drop': '#F6FFFE',
+  'wisteria-dust': '#FAF6FF',
+  'cloud-shoes': '#F2F8FF',
+  'oat-swirl': '#FCF7EC',
+  'grape-frost': '#F4F0FF',
+  'blush-powder': '#FDF1F9',
+  'spearmint-fizz': '#ECFFF9',
+  'lilac-bloom': '#F5E6FD',
+  'periwinkle-shimmer': '#E8E6FF',
+  'apricot-glaze': '#FFF4E8',
+  'butter-puff': '#FFFFD8',
+  'sage-whisper': '#F3F4EF',
+  'twilight-haze': '#C0C1DE',
+  'mint-sheen': '#EBFAF2',
+  'smoke-hush': '#F5F7F8',
+} as const
 
-export const digitalPurple = [
-  "#BAAEFF",
-  "#E8E1FA", // labeled "363333" in source — see note above, using pixel value instead
-  "#E1DFFB", // labeled "534D4D" in source — see note above, using pixel value instead
-  "#E8E1FA",
-  "#E1DFFB",
-  "#EFE7FA",
-  "#F3EBFD",
-  "#F7E0FF",
-  "#F1F0FF",
-  "#FAF6FF",
-] as const;
+export type Tone = keyof typeof tone
 
-export const sweetMochi = [
-  "#F2B9E0",
-  "#FAE7EF",
-  "#F9E5F3",
-  "#F7E0FF",
-  "#F4DBF9",
-  "#FAEDFF",
-] as const;
+/** Back-compat: v0.4 exported a flat `color` map. */
+export const color = { ...tone }
 
-export const jazzBlues = [
-  "#C2CDE7",
-  "#F0F2FA",
-  "#ECF3FE",
-  "#EAFDFC",
-  "#F6FFFE",
-] as const;
+/** Neutral text/border ramp. Ratios are against ink[50]. */
+export const ink = {
+  900: '#1A1720', // headings, primary text — 16.4:1
+  700: '#3A3542', // body on tinted surfaces — 11.2:1
+  500: '#55505E', // secondary text — 7.1:1
+  300: '#8A8494', // labels + disabled ONLY, never body — 3.4:1
+  100: '#E6E2EC', // borders, dividers
+  50: '#FAF9FB',  // page canvas
+} as const
 
-export const springGreens = [
-  "#BBFFDD",
-  "#EAF9D2",
-  "#EDFDDA",
-  "#F3FAEA",
-] as const;
-
-export const citrus = [
-  "#FCF3E1",
-  "#FAEFDE",
-  "#FEF6CC",
-  "#F9FAC5",
-  "#FDFAE4",
-  "#FCFADE",
-  "#FFFEE9",
-  "#FFFFF9",
-] as const;
-
-export const palettes = {
-  gothGrunge,
-  digitalPurple,
-  sweetMochi,
-  jazzBlues,
-  springGreens,
-  citrus,
-} as const;
-
-export type PaletteName = keyof typeof palettes;
-
-/** Semantic aliases — the tones components actually reach for, named as
- * their own cute mini-palette rather than generic color words.
- *
- * matchaFoam through smokeHush below come from electrocute.io's project
- * grid — originally just `.projectCard1` through `.projectCard18` with a
- * hex value and no name, named here the same way as everything else.
+/**
+ * Status is always a PAIR. Shipping a surface without its ink is the bug
+ * this token shape exists to prevent.
  */
-export const color = {
-  ink: gothGrunge[0],
-  inkSoft: gothGrunge[2],
-  gray: gothGrunge[5],
-  border: gothGrunge[6],
-  paper: gothGrunge[9],
+export const status = {
+  success: { surface: '#E7FBF0', ink: '#0E5E3C', ratio: 7.9 },
+  warning: { surface: '#FFFAE0', ink: '#7A4F00', ratio: 8.4 },
+  danger:  { surface: '#FFE4EC', ink: '#A8123A', ratio: 6.6 },
+  info:    { surface: '#ECF3FE', ink: '#1B4FA8', ratio: 7.5 },
+} as const
 
-  lavenderBeam: digitalPurple[0],
-  lavenderBeamTint: digitalPurple[3],
+export type StatusName = keyof typeof status
 
-  peonyFizz: sweetMochi[0],
-  peonyFizzTint: sweetMochi[3],
+/** lavender-beam is a surface, not an ink — focus rings and links need a darker cut. */
+export const accent = {
+  surface: tone['lavender-beam'],
+  hover: '#A79AF5',
+  strong: '#5B3FD6',      // focus ring, link text — 6.9:1 on canvas
+  strongHover: '#3D269E',
+  dark: '#8A78F0',        // accent surface in the dark theme
+} as const
 
-  glacierMist: jazzBlues[2],
-  glacierMistTint: jazzBlues[3],
+export type ThemeName = 'light' | 'dark' | 'accessible'
 
-  pistachioSwirl: springGreens[0],
-  pistachioSwirlTint: springGreens[1],
+export interface RoleTokens {
+  canvas: string
+  surface: string
+  'surface-sunken': string
+  'surface-accent': string
+  ink: string
+  'ink-muted': string
+  'ink-subtle': string
+  accent: string
+  'accent-hover': string
+  'accent-ink': string
+  line: string
+  'line-strong': string
+  focus: string
+  'success-surface': string; 'success-ink': string
+  'warning-surface': string; 'warning-ink': string
+  'danger-surface': string;  'danger-ink': string
+  'info-surface': string;    'info-ink': string
+}
 
-  // marzipanCloud is intentionally lighter than citrus[2] (#FEF6CC) — a
-  // deliberate deviation from the sampled Figma swatch, not an error.
-  marzipanCloud: "#FFFAE0",
-  marzipanCloudTint: citrus[4],
+export const roles: Record<ThemeName, RoleTokens> = {
+  light: {
+    canvas: ink[50],
+    surface: '#FFFFFF',
+    'surface-sunken': tone['smoke-hush'],
+    'surface-accent': tone['wisteria-dust'],
+    ink: ink[900],
+    'ink-muted': ink[500],
+    'ink-subtle': ink[300],
+    accent: accent.surface,
+    'accent-hover': accent.hover,
+    'accent-ink': ink[900],
+    line: ink[100],
+    'line-strong': ink[900],
+    focus: accent.strong,
+    'success-surface': status.success.surface, 'success-ink': status.success.ink,
+    'warning-surface': status.warning.surface, 'warning-ink': status.warning.ink,
+    'danger-surface': status.danger.surface,   'danger-ink': status.danger.ink,
+    'info-surface': status.info.surface,       'info-ink': status.info.ink,
+  },
+  dark: {
+    canvas: '#141218',
+    surface: '#1E1B24',
+    'surface-sunken': '#171520',
+    'surface-accent': '#241F33',
+    ink: '#F4F2F8',
+    'ink-muted': '#A9A3B8',
+    'ink-subtle': '#7C7690',
+    accent: accent.dark,
+    'accent-hover': '#9B8CF5',
+    'accent-ink': '#0D0B12',
+    line: '#332E3F',
+    'line-strong': '#4A4458',
+    focus: '#B9A9FF',
+    // Pastel surfaces are unreadable on dark — surfaces go deep, inks go light.
+    'success-surface': '#13301F', 'success-ink': '#7BE3AE',
+    'warning-surface': '#302713', 'warning-ink': '#F0CE7B',
+    'danger-surface': '#33131F',  'danger-ink': '#F79BB8',
+    'info-surface': '#131F33',    'info-ink': '#9BC1F7',
+  },
+  /** Reader mode: a blunt legibility floor, not a third color scheme. */
+  accessible: {
+    canvas: '#FFFFFF',
+    surface: '#FFFFFF',
+    'surface-sunken': '#F2F2F2',
+    'surface-accent': '#FFFFFF',
+    ink: '#000000',
+    'ink-muted': '#000000',
+    'ink-subtle': '#3D3D3D',
+    accent: '#000000',
+    'accent-hover': '#2B2B2B',
+    'accent-ink': '#FFFFFF',
+    line: '#000000',
+    'line-strong': '#000000',
+    focus: '#000000',
+    'success-surface': '#FFFFFF', 'success-ink': '#00532F',
+    'warning-surface': '#FFFFFF', 'warning-ink': '#5C3A00',
+    'danger-surface': '#FFFFFF',  'danger-ink': '#8A0026',
+    'info-surface': '#FFFFFF',    'info-ink': '#003C8F',
+  },
+}
 
-  mochiCream: sweetMochi[5],
-
-  matchaFoam: "#f3faea",
-  petalVeil: "#fff3f8",
-  vanillaGlow: "#fffee9",
-  seafoamDrop: "#f6fffe",
-  wisteriaDust: "#faf6ff",
-  cloudShoes: "#f2f8ff",
-  oatSwirl: "#fcf7ec",
-  grapeFrost: "#f4f0ff",
-  blushPowder: "#fdf1f9",
-  spearmintFizz: "#ecfff9",
-  lilacBloom: "#f5e6fd",
-  periwinkleShimmer: "#e8e6ff",
-  apricotGlaze: "#fff4e8",
-  butterPuff: "#ffffd8",
-  sageWhisper: "#f3f4ef",
-  twilightHaze: "#c0c1de",
-  mintSheen: "#ebfaf2",
-  smokeHush: "#f5f7f8",
-} as const;
-
+/** Use in component styles: `{ background: cssVar('accent') }` */
+export const cssVar = (role: keyof RoleTokens) => `var(--ecu-${role})`

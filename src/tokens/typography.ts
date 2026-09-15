@@ -1,32 +1,56 @@
 /**
- * Typography tokens from the Electrocute Design System v0.1 Figma file.
- *
- * The Figma file shows three candidate type systems side by side (Skia,
- * IBM Plex Sans Condensed, Roboto) — a decision still being finalized.
- * Defaulting to IBM Plex Sans Condensed here since it matches the Plex
- * family already used across electrocute.io, tinytinker.tools, and the
- * rest of Yafira's web properties. Swap `fontFamily.display` below once
- * the Figma file locks in a final choice.
+ * IBM Plex Sans Condensed is a DISPLAY face — it loses counter width at body
+ * sizes. v0.5 splits the stack: condensed for headings, regular-width Plex
+ * Sans for body, Plex Mono for labels and code.
  */
+export const font = {
+  display: "'IBM Plex Sans Condensed', system-ui, sans-serif",
+  body: "'IBM Plex Sans', system-ui, -apple-system, sans-serif",
+  mono: "'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace",
+} as const
 
-export const fontFamily = {
-  display: "'IBM Plex Sans Condensed', sans-serif",
-  body: "'IBM Plex Sans Condensed', sans-serif",
-  mono: "'IBM Plex Mono', 'Departure Mono', monospace",
-} as const;
+export const fontWeight = { regular: 400, medium: 500, semibold: 600, bold: 700 } as const
 
-export const type = {
-  h1: { fontSize: "60px", fontWeight: 700, lineHeight: 1.1 },
-  h2: { fontSize: "40px", fontWeight: 700, lineHeight: 1.15 },
-  h3: { fontSize: "30px", fontWeight: 600, lineHeight: 1.2 },
-  h4: { fontSize: "24px", fontWeight: 700, lineHeight: 1.25 },
-  h5: { fontSize: "20px", fontWeight: 700, lineHeight: 1.3 },
-  h6: { fontSize: "18px", fontWeight: 600, lineHeight: 1.35 },
-  body1: { fontSize: "18px", fontWeight: 400, lineHeight: 1.5 },
-  body2: { fontSize: "16px", fontWeight: 400, lineHeight: 1.5 },
-  body3: { fontSize: "14px", fontWeight: 400, lineHeight: 1.5 },
-  body4: { fontSize: "12px", fontWeight: 400, lineHeight: 1.45 },
-  body5: { fontSize: "11px", fontWeight: 400, lineHeight: 1.4 },
-} as const;
+/** 1.25 modular scale off a 16px base, rounded to whole px. */
+export const fontSize = {
+  display: '60px',
+  h1: '40px',
+  h2: '32px',
+  h3: '24px',
+  'body-lg': '19px',
+  body: '16px',
+  small: '14px',
+  label: '12px',
+} as const
 
-export type TypeToken = keyof typeof type;
+export const lineHeight = { display: 0.98, heading: 1.12, tight: 1.2, body: 1.55 } as const
+
+export const letterSpacing = {
+  display: '-0.03em',
+  h1: '-0.025em',
+  h2: '-0.02em',
+  h3: '-0.015em',
+  body: '0',
+  label: '0.14em',
+} as const
+
+export interface TypeStyle {
+  fontFamily: string
+  fontSize: string
+  fontWeight: number
+  lineHeight: number
+  letterSpacing: string
+  textTransform?: 'uppercase'
+}
+
+/** Spread into a style object: `style={{ ...textStyle.h2 }}` */
+export const textStyle = {
+  display: { fontFamily: font.display, fontSize: fontSize.display, fontWeight: 600, lineHeight: lineHeight.display, letterSpacing: letterSpacing.display },
+  h1: { fontFamily: font.display, fontSize: fontSize.h1, fontWeight: 600, lineHeight: lineHeight.heading, letterSpacing: letterSpacing.h1 },
+  h2: { fontFamily: font.display, fontSize: fontSize.h2, fontWeight: 600, lineHeight: lineHeight.heading, letterSpacing: letterSpacing.h2 },
+  h3: { fontFamily: font.display, fontSize: fontSize.h3, fontWeight: 600, lineHeight: lineHeight.tight, letterSpacing: letterSpacing.h3 },
+  bodyLg: { fontFamily: font.body, fontSize: fontSize['body-lg'], fontWeight: 400, lineHeight: lineHeight.body, letterSpacing: letterSpacing.body },
+  body: { fontFamily: font.body, fontSize: fontSize.body, fontWeight: 400, lineHeight: lineHeight.body, letterSpacing: letterSpacing.body },
+  small: { fontFamily: font.body, fontSize: fontSize.small, fontWeight: 400, lineHeight: 1.45, letterSpacing: letterSpacing.body },
+  label: { fontFamily: font.mono, fontSize: fontSize.label, fontWeight: 500, lineHeight: 1.3, letterSpacing: letterSpacing.label, textTransform: 'uppercase' },
+} as const satisfies Record<string, TypeStyle>

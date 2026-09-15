@@ -6,9 +6,9 @@ const meta: Meta<typeof Badge> = {
   component: Badge,
   tags: ["autodocs"],
   argTypes: {
-    tone: { control: "select", options: ["lavender-beam", "peony-fizz", "marzipan-cloud", "pistachio-swirl", "gray"] },
+    intent: { control: "select", options: ["neutral", "success", "warning", "danger", "info"] },
   },
-  args: { tone: "lavender-beam", children: "Badge" },
+  args: { intent: "neutral", children: "Badge" },
 };
 export default meta;
 
@@ -16,11 +16,11 @@ type Story = StoryObj<typeof Badge>;
 
 export const Playground: Story = {};
 
-export const AllTones: Story = {
+export const AllIntents: Story = {
   render: () => (
     <div style={{ display: "flex", gap: 8 }}>
-      {(["lavender-beam", "peony-fizz", "marzipan-cloud", "pistachio-swirl", "gray"] as const).map((tone) => (
-        <Badge key={tone} tone={tone}>
+      {(["neutral", "success", "warning", "danger", "info"] as const).map((intent) => (
+        <Badge key={intent} intent={intent}>
           Badge
         </Badge>
       ))}

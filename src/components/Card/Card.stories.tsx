@@ -7,12 +7,9 @@ const meta: Meta<typeof Card> = {
   component: Card,
   tags: ["autodocs"],
   argTypes: {
-    tone: {
-      control: "select",
-      options: ["pistachio-swirl", "marzipan-cloud", "peony-fizz", "glacier-mist", "lavender-beam", "mochi-cream"],
-    },
+    surface: { control: "select", options: ["default", "sunken", "accent"] },
   },
-  args: { tone: "pistachio-swirl" },
+  args: { surface: "default" },
 };
 export default meta;
 
@@ -21,31 +18,29 @@ type Story = StoryObj<typeof Card>;
 export const Playground: Story = {
   render: (args) => (
     <div style={{ width: 220 }}>
-      <Card {...args} />
+      <Card {...args}>Card content</Card>
     </div>
   ),
 };
 
-export const AllTones: Story = {
+export const AllSurfaces: Story = {
   render: () => (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 160px)", gap: 16 }}>
-      {(["pistachio-swirl", "marzipan-cloud", "peony-fizz", "glacier-mist", "lavender-beam", "mochi-cream"] as const).map(
-        (tone) => (
-          <Card key={tone} tone={tone} />
-        )
-      )}
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 160px)", gap: 16 }}>
+      {(["default", "sunken", "accent"] as const).map((surface) => (
+        <Card key={surface} surface={surface}>
+          {surface}
+        </Card>
+      ))}
     </div>
   ),
 };
 
-export const HoverAccentGrid: Story = {
+export const Interactive: Story = {
   render: () => (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 160px)", gap: 16 }}>
-      {(["pistachio-swirl", "marzipan-cloud", "peony-fizz", "glacier-mist", "lavender-beam", "mochi-cream"] as const).map(
-        (tone) => (
-          <Card key={tone} tone={tone} hoverAccent />
-        )
-      )}
+    <div style={{ width: 220 }}>
+      <Card interactive onActivate={() => alert("activated")}>
+        Click or press Enter/Space
+      </Card>
     </div>
   ),
 };
@@ -62,11 +57,11 @@ export const ToolCardPattern: Story = {
   },
   render: () => (
     <div style={{ width: 240 }}>
-      <Card tone="glacier-mist">
+      <Card surface="sunken">
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           <div style={{ fontWeight: 700, fontSize: 15 }}>resistor decoder</div>
-          <Badge tone="peony-fizz">decode</Badge>
-          <div style={{ fontWeight: 400, fontSize: 13, color: "#696262" }}>
+          <Badge intent="info">decode</Badge>
+          <div style={{ fontWeight: 400, fontSize: 13, color: "var(--ecu-ink-muted)" }}>
             color band → resistance value
           </div>
         </div>
