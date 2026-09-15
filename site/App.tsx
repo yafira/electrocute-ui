@@ -7,6 +7,7 @@ import {
   Switch,
   Checkbox,
   Inkbloom,
+  BloomOutline,
   tone,
 } from "../src";
 import "../src/theme/theme.css";
@@ -30,11 +31,26 @@ type ThemeKey = (typeof THEMES)[number]["key"];
 
 // Mirrors theme.css exactly — for the side-by-side role comparison table,
 // where all three themes need to be visible on screen at once.
-const ROLE_ROWS: { role: string; light: string; dark: string; reader: string }[] = [
+const ROLE_ROWS: {
+  role: string;
+  light: string;
+  dark: string;
+  reader: string;
+}[] = [
   { role: "canvas", light: "#faf9fb", dark: "#141218", reader: "#ffffff" },
   { role: "surface", light: "#ffffff", dark: "#1e1b24", reader: "#ffffff" },
-  { role: "surface.sunken", light: "#f5f7f8", dark: "#171520", reader: "#f2f2f2" },
-  { role: "surface.accent", light: "#faf6ff", dark: "#241f33", reader: "#ffffff" },
+  {
+    role: "surface.sunken",
+    light: "#f5f7f8",
+    dark: "#171520",
+    reader: "#f2f2f2",
+  },
+  {
+    role: "surface.accent",
+    light: "#faf6ff",
+    dark: "#241f33",
+    reader: "#ffffff",
+  },
   { role: "ink", light: "#1a1720", dark: "#f4f2f8", reader: "#000000" },
   { role: "ink.muted", light: "#55505e", dark: "#a9a3b8", reader: "#000000" },
   { role: "accent", light: "#baaeff", dark: "#8a78f0", reader: "#000000" },
@@ -46,25 +62,31 @@ const ROLE_ROWS: { role: string; light: string; dark: string; reader: string }[]
 const GUIDANCE = [
   {
     title: "Text on pastel",
-    doText: "Pair every tinted surface with ink.900 or ink.700 at full opacity.",
+    doText:
+      "Pair every tinted surface with ink.900 or ink.700 at full opacity.",
     dontText:
       "Set body text in a pastel, or fade ink with opacity to soften it — that's how 3:1 copy happens.",
   },
   {
     title: "Choosing a tone",
-    doText: "Reach for a role. If you need decoration, use tone and say so in a comment.",
+    doText:
+      "Reach for a role. If you need decoration, use tone and say so in a comment.",
     dontText:
       "Pick between wisteria-dust and grape-frost by eye — they differ by 4% and nobody will notice but you.",
   },
   {
     title: "Status color",
-    doText: "Use the four status pairs. Surface and ink always travel together.",
-    dontText: "Invent a red. Peony-fizz is not an error state, however pink it looks.",
+    doText:
+      "Use the four status pairs. Surface and ink always travel together.",
+    dontText:
+      "Invent a red. Peony-fizz is not an error state, however pink it looks.",
   },
   {
     title: "Reader mode",
-    doText: "Treat it as an override: black ink, white surface, visible borders, no tints.",
-    dontText: "Try to make reader mode pretty. It's a legibility floor, not a fourth theme.",
+    doText:
+      "Treat it as an override: black ink, white surface, visible borders, no tints.",
+    dontText:
+      "Try to make reader mode pretty. It's a legibility floor, not a fourth theme.",
   },
 ];
 
@@ -73,21 +95,24 @@ const ESSAYS = [
     kicker: "Decision 01",
     title: "Keep all 24 names",
     body: "Cutting the palette to a tidy eight was the obvious move, and it was wrong. The names are the reason anyone remembers this system — mochi-cream is a thing you can ask for out loud. What was actually broken was that tones were the API, so every component author had to be a color designer.",
-    punch: "So the tones stayed and a role layer went on top. Nothing was deleted; something was added.",
+    punch:
+      "So the tones stayed and a role layer went on top. Nothing was deleted; something was added.",
     bg: "var(--ecu-surface-accent)",
   },
   {
     kicker: "Decision 02",
     title: "Reader mode isn't a color scheme",
     body: "The temptation with a high-contrast mode is to make it an on-brand variant — slightly deeper pastels, a bit more border. That produces something that fails contrast checks and looks worse than either alternative.",
-    punch: "Reader mode is deliberately blunt: black, white, hard borders, zero tint. It has one job and it does it.",
+    punch:
+      "Reader mode is deliberately blunt: black, white, hard borders, zero tint. It has one job and it does it.",
     bg: "#ECFFF9",
   },
   {
     kicker: "Decision 03",
     title: "Tokens should be build output",
     body: "src/tokens was hand-sampled from Figma, and it already carries a comment flagging two swatches that look like a copy-paste artifact. Hand-maintained tokens drift the moment anyone touches the file they came from.",
-    punch: "v0.7 generates tokens from a Figma Tokens export in CI. Until then, the comment stays — an honest note beats a silent wrong value.",
+    punch:
+      "v0.7 generates tokens from a Figma Tokens export in CI. Until then, the comment stays — an honest note beats a silent wrong value.",
     bg: "#FFF4E8",
   },
 ];
@@ -95,7 +120,8 @@ const ESSAYS = [
 function CopyInstall() {
   const [copied, setCopied] = useState(false);
   const onCopy = () => {
-    if (navigator.clipboard) navigator.clipboard.writeText("npm install electrocute-ui");
+    if (navigator.clipboard)
+      navigator.clipboard.writeText("npm install electrocute-ui");
     setCopied(true);
     setTimeout(() => setCopied(false), 1800);
   };
@@ -154,11 +180,19 @@ function ComponentsShowcase() {
         <div style={{ maxWidth: 620 }}>
           <h2 style={sectionHeadingStyle}>Components, actually running</h2>
           <p style={sectionBodyStyle}>
-            Not screenshots. Switch the theme and watch every component below follow — that's
-            the role layer doing its job.
+            Not screenshots. Switch the theme and watch every component below
+            follow — that's the role layer doing its job.
           </p>
         </div>
-        <div style={{ display: "flex", gap: 4, padding: 4, background: "#F2F0F6", borderRadius: 999 }}>
+        <div
+          style={{
+            display: "flex",
+            gap: 4,
+            padding: 4,
+            background: "#F2F0F6",
+            borderRadius: 999,
+          }}
+        >
           {THEMES.map((t) => (
             <button
               key={t.key}
@@ -193,28 +227,52 @@ function ComponentsShowcase() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
             gap: 20,
           }}
         >
           <ShowcaseTile label="Button">
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-              <Button intent="primary" variant="solid">Primary</Button>
+              <Button intent="primary" variant="solid">
+                Primary
+              </Button>
               <Button variant="outline">Outline</Button>
-              <Button intent="neutral" variant="pill">Pill</Button>
+              <Button intent="neutral" variant="pill">
+                Pill
+              </Button>
             </div>
           </ShowcaseTile>
 
           <ShowcaseTile label="Field">
-            <Input label="Email" placeholder="you@electrocute.io" hint="Hint text lives in the field shell." />
+            <Input
+              label="Email"
+              placeholder="you@electrocute.io"
+              hint="Hint text lives in the field shell."
+            />
           </ShowcaseTile>
 
           <ShowcaseTile label="Card · interactive" accent>
             <Card interactive surface="accent">
-              <div style={{ fontFamily: "'IBM Plex Sans Condensed', sans-serif", fontSize: 22, fontWeight: 600, letterSpacing: "-0.015em", marginBottom: 8 }}>
+              <div
+                style={{
+                  fontFamily: "'IBM Plex Sans Condensed', sans-serif",
+                  fontSize: 22,
+                  fontWeight: 600,
+                  letterSpacing: "-0.015em",
+                  marginBottom: 8,
+                }}
+              >
                 Inkbloom covers
               </div>
-              <p style={{ fontSize: 15, lineHeight: 1.5, margin: 0, color: "var(--ecu-ink-muted)" }}>
+              <p
+                style={{
+                  fontSize: 15,
+                  lineHeight: 1.5,
+                  margin: 0,
+                  color: "var(--ecu-ink-muted)",
+                }}
+              >
                 Focusable, keyboard-reachable, hover-accented.
               </p>
             </Card>
@@ -230,7 +288,15 @@ function ComponentsShowcase() {
           </ShowcaseTile>
 
           <ShowcaseTile label="Nav">
-            <div style={{ display: "flex", gap: 6, padding: 6, borderRadius: 999, background: "var(--ecu-surface-sunken)" }}>
+            <div
+              style={{
+                display: "flex",
+                gap: 6,
+                padding: 6,
+                borderRadius: 999,
+                background: "var(--ecu-surface-sunken)",
+              }}
+            >
               {["Aa", "Bb", "Cc", "Dd"].map((glyph, i) => (
                 <div
                   key={glyph}
@@ -245,7 +311,10 @@ function ComponentsShowcase() {
                     fontSize: 13,
                     fontWeight: 600,
                     background: i === 0 ? "var(--ecu-accent)" : "transparent",
-                    color: i === 0 ? "var(--ecu-accent-ink)" : "var(--ecu-ink-muted)",
+                    color:
+                      i === 0
+                        ? "var(--ecu-accent-ink)"
+                        : "var(--ecu-ink-muted)",
                   }}
                 >
                   {glyph}
@@ -262,29 +331,44 @@ function ComponentsShowcase() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                textAlign: "center",
+                gap: 24,
                 padding: 14,
                 border: "1px dashed var(--ecu-line)",
                 backgroundImage:
                   "repeating-linear-gradient(135deg, rgba(186,174,255,0.22) 0 6px, transparent 6px 12px)",
               }}
             >
-              <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 11.5, lineHeight: 1.5, color: "var(--ecu-ink-muted)" }}>
-                live Inkbloom render
-                <br />
-                drops in here
-              </span>
+              <Inkbloom size="lg" />
+              <BloomOutline size="lg" color="var(--ecu-ink)" />
             </div>
-            <p style={{ fontSize: 14, lineHeight: 1.5, margin: "14px 0 0", color: "var(--ecu-ink-muted)" }}>
+            <p
+              style={{
+                fontSize: 14,
+                lineHeight: 1.5,
+                margin: "14px 0 0",
+                color: "var(--ecu-ink-muted)",
+              }}
+            >
               The generative pair still paints its own colors instead of reading{" "}
-              <code style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 13 }}>--ecu-accent</code>. Retrofit
-              lands in v0.7.
+              <code
+                style={{
+                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontSize: 13,
+                }}
+              >
+                --ecu-accent
+              </code>
+              . Retrofit lands in v0.7.
             </p>
           </ShowcaseTile>
 
           <ShowcaseTile label="Switch · Checkbox">
             <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-              <Switch checked={switchOn} onCheckedChange={setSwitchOn} label="Themed" />
+              <Switch
+                checked={switchOn}
+                onCheckedChange={setSwitchOn}
+                label="Themed"
+              />
               <Checkbox label="Themed" defaultChecked />
             </div>
           </ShowcaseTile>
@@ -302,8 +386,9 @@ function ComponentsShowcase() {
             color: "var(--ecu-ink-muted)",
           }}
         >
-          data-ecu-theme="{theme}" &nbsp;·&nbsp; --ecu-accent: var(--ecu-accent) &nbsp;·&nbsp; --ecu-ink: var(--ecu-ink)
-          &nbsp;·&nbsp; --ecu-surface: var(--ecu-surface)
+          data-ecu-theme="{theme}" &nbsp;·&nbsp; --ecu-accent: var(--ecu-accent)
+          &nbsp;·&nbsp; --ecu-ink: var(--ecu-ink) &nbsp;·&nbsp; --ecu-surface:
+          var(--ecu-surface)
         </div>
       </div>
     </div>
@@ -330,7 +415,15 @@ function ShowcaseTile({
         padding: 24,
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, marginBottom: 18 }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 10,
+          marginBottom: 18,
+        }}
+      >
         <div
           style={{
             fontFamily: "'IBM Plex Mono', monospace",
@@ -383,7 +476,14 @@ const sectionBodyStyle: React.CSSProperties = {
 
 export function App() {
   return (
-    <div style={{ fontFamily: "'IBM Plex Sans', system-ui, sans-serif", color: "#1A1720", background: "#FAF9FB", textWrap: "pretty" as any }}>
+    <div
+      style={{
+        fontFamily: "'IBM Plex Sans', system-ui, sans-serif",
+        color: "#1A1720",
+        background: "#FAF9FB",
+        textWrap: "pretty" as any,
+      }}
+    >
       {/* HEADER */}
       <header
         style={{
@@ -398,10 +498,15 @@ export function App() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <div style={{ width: 26, height: 26, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 8, background: tone["lavender-beam"], border: "1.5px solid #1A1720" }}>
-            <Inkbloom size="sm" />
-          </div>
-          <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em" }}>
+          <Inkbloom size="lg" />
+          <span
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: 15,
+              fontWeight: 600,
+              letterSpacing: "-0.01em",
+            }}
+          >
             electrocute-ui
           </span>
           <span
@@ -418,12 +523,38 @@ export function App() {
             v0.5
           </span>
         </div>
-        <nav style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
-          <a href="#components" style={navLinkStyle}>Components</a>
-          <a href="#tokens" style={navLinkStyle}>Tokens</a>
-          <a href="#guidance" style={navLinkStyle}>Guidance</a>
-          <a href="#thinking" style={navLinkStyle}>Thinking</a>
-          <a href="/storybook/" style={{ ...navLinkStyle, fontWeight: 600, padding: "9px 18px", borderRadius: 999, background: "#1A1720", color: "#FFFFFF", marginLeft: 6 }}>
+        <nav
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 6,
+            alignItems: "center",
+          }}
+        >
+          <a href="#components" style={navLinkStyle}>
+            Components
+          </a>
+          <a href="#tokens" style={navLinkStyle}>
+            Tokens
+          </a>
+          <a href="#guidance" style={navLinkStyle}>
+            Guidance
+          </a>
+          <a href="#thinking" style={navLinkStyle}>
+            Thinking
+          </a>
+          <a
+            href="/storybook/"
+            style={{
+              ...navLinkStyle,
+              fontWeight: 600,
+              padding: "9px 18px",
+              borderRadius: 999,
+              background: "#1A1720",
+              color: "#FFFFFF",
+              marginLeft: 6,
+            }}
+          >
             Storybook →
           </a>
         </nav>
@@ -436,13 +567,23 @@ export function App() {
           margin: "0 auto",
           padding: "clamp(56px, 9vw, 104px) clamp(20px, 5vw, 56px) 72px",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))",
+          gridTemplateColumns:
+            "repeat(auto-fit, minmax(min(100%, 400px), 1fr))",
           gap: 56,
           alignItems: "center",
         }}
       >
         <div>
-          <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 12, letterSpacing: "0.14em", textTransform: "uppercase", color: "#55505E", marginBottom: 20 }}>
+          <div
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: 12,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "#55505E",
+              marginBottom: 20,
+            }}
+          >
             Electrocute Lab · design system
           </div>
           <h1
@@ -457,23 +598,46 @@ export function App() {
           >
             A cute palette with rules.
           </h1>
-          <p style={{ fontSize: 19, lineHeight: 1.55, color: "#3A3542", margin: "0 0 32px", maxWidth: 520 }}>
-            Twenty-four named pastels, a semantic role layer that tells you which one to reach for,
-            and thirteen React components that theme themselves. Built for the lab's own sites —
-            documented like it's for someone else.
+          <p
+            style={{
+              fontSize: 19,
+              lineHeight: 1.55,
+              color: "#3A3542",
+              margin: "0 0 32px",
+              maxWidth: 520,
+            }}
+          >
+            Twenty-four named pastels, a semantic role layer that tells you
+            which one to reach for, and thirteen React components that theme
+            themselves. Built for the lab's own sites — documented like it's for
+            someone else.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center", marginBottom: 26 }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 12,
+              alignItems: "center",
+              marginBottom: 26,
+            }}
+          >
             <a href="#components" style={{ textDecoration: "none" }}>
-              <Button intent="primary" variant="pill" size="lg">Browse components</Button>
+              <Button intent="primary" variant="pill" size="lg">
+                Browse components
+              </Button>
             </a>
             <a href="/storybook/" style={{ textDecoration: "none" }}>
-              <Button intent="neutral" variant="outline" size="lg">Open Storybook</Button>
+              <Button intent="neutral" variant="outline" size="lg">
+                Open Storybook
+              </Button>
             </a>
           </div>
           <CopyInstall />
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+        <div
+          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}
+        >
           {[
             { name: "lavender-beam", role: "accent" },
             { name: "marzipan-cloud", role: "warning" },
@@ -493,10 +657,25 @@ export function App() {
                 border: "1.5px solid #1A1720",
               }}
             >
-              <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              <div
+                style={{
+                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontSize: 11,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                }}
+              >
                 {s.name}
               </div>
-              <div style={{ fontFamily: "'IBM Plex Sans Condensed', sans-serif", fontSize: 30, fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1.05 }}>
+              <div
+                style={{
+                  fontFamily: "'IBM Plex Sans Condensed', sans-serif",
+                  fontSize: 30,
+                  fontWeight: 600,
+                  letterSpacing: "-0.02em",
+                  lineHeight: 1.05,
+                }}
+              >
                 {s.role}
               </div>
             </div>
@@ -505,14 +684,21 @@ export function App() {
       </section>
 
       {/* STATS */}
-      <section style={{ background: "#FFFFFF", borderTop: "1px solid #E6E2EC", borderBottom: "1px solid #E6E2EC" }}>
+      <section
+        style={{
+          background: "#FFFFFF",
+          borderTop: "1px solid #E6E2EC",
+          borderBottom: "1px solid #E6E2EC",
+        }}
+      >
         <div
           style={{
             maxWidth: 1240,
             margin: "0 auto",
             padding: "64px clamp(20px, 5vw, 56px)",
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
             gap: 40,
           }}
         >
@@ -520,8 +706,9 @@ export function App() {
             big="10 roles"
             body={
               <>
-                Components name a role — <Code>accent</Code>, <Code>surface</Code>,{" "}
-                <Code>ink.muted</Code> — never a tone. The theme does the mapping.
+                Components name a role — <Code>accent</Code>,{" "}
+                <Code>surface</Code>, <Code>ink.muted</Code> — never a tone. The
+                theme does the mapping.
               </>
             }
           />
@@ -537,19 +724,44 @@ export function App() {
       </section>
 
       {/* COMPONENTS */}
-      <section id="components" style={{ maxWidth: 1240, margin: "0 auto", padding: "80px clamp(20px, 5vw, 56px) 0", scrollMarginTop: 20 }}>
+      <section
+        id="components"
+        style={{
+          maxWidth: 1240,
+          margin: "0 auto",
+          padding: "80px clamp(20px, 5vw, 56px) 0",
+          scrollMarginTop: 20,
+        }}
+      >
         <ComponentsShowcase />
       </section>
 
       {/* TOKENS */}
-      <section id="tokens" style={{ maxWidth: 1240, margin: "0 auto", padding: "80px clamp(20px, 5vw, 56px) 0", scrollMarginTop: 20 }}>
+      <section
+        id="tokens"
+        style={{
+          maxWidth: 1240,
+          margin: "0 auto",
+          padding: "80px clamp(20px, 5vw, 56px) 0",
+          scrollMarginTop: 20,
+        }}
+      >
         <h2 style={sectionHeadingStyle}>Tokens</h2>
         <p style={{ ...sectionBodyStyle, marginBottom: 32 }}>
-          Roles first, because that's the layer you actually write against. The tones are underneath,
-          and they keep their silly names on purpose.
+          Roles first, because that's the layer you actually write against. The
+          tones are underneath, and they keep their silly names on purpose.
         </p>
 
-        <div style={{ background: "#FFFFFF", border: "1px solid #E6E2EC", borderRadius: 20, padding: 8, overflowX: "auto", marginBottom: 22 }}>
+        <div
+          style={{
+            background: "#FFFFFF",
+            border: "1px solid #E6E2EC",
+            borderRadius: 20,
+            padding: 8,
+            overflowX: "auto",
+            marginBottom: 22,
+          }}
+        >
           <div
             style={{
               display: "grid",
@@ -562,22 +774,65 @@ export function App() {
             }}
           >
             {["Role", "Light", "Dark", "Reader"].map((h) => (
-              <div key={h} style={{ background: "#FAF9FB", padding: "13px 16px", fontFamily: "'IBM Plex Mono', monospace", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "#55505E" }}>
+              <div
+                key={h}
+                style={{
+                  background: "#FAF9FB",
+                  padding: "13px 16px",
+                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontSize: 11,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#55505E",
+                }}
+              >
                 {h}
               </div>
             ))}
             {ROLE_ROWS.map((r) => (
               <div key={r.role} style={{ display: "contents" }}>
-                <div style={{ background: "#FFFFFF", padding: "13px 16px", fontFamily: "'IBM Plex Mono', monospace", fontSize: 13, fontWeight: 500 }}>
+                <div
+                  style={{
+                    background: "#FFFFFF",
+                    padding: "13px 16px",
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: 13,
+                    fontWeight: 500,
+                  }}
+                >
                   {r.role}
                 </div>
-                <div style={{ background: "#FFFFFF", padding: "13px 16px", fontFamily: "'IBM Plex Mono', monospace", fontSize: 13, color: "#55505E" }}>
+                <div
+                  style={{
+                    background: "#FFFFFF",
+                    padding: "13px 16px",
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: 13,
+                    color: "#55505E",
+                  }}
+                >
                   {r.light}
                 </div>
-                <div style={{ background: "#FFFFFF", padding: "13px 16px", fontFamily: "'IBM Plex Mono', monospace", fontSize: 13, color: "#55505E" }}>
+                <div
+                  style={{
+                    background: "#FFFFFF",
+                    padding: "13px 16px",
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: 13,
+                    color: "#55505E",
+                  }}
+                >
                   {r.dark}
                 </div>
-                <div style={{ background: "#FFFFFF", padding: "13px 16px", fontFamily: "'IBM Plex Mono', monospace", fontSize: 13, color: "#55505E" }}>
+                <div
+                  style={{
+                    background: "#FFFFFF",
+                    padding: "13px 16px",
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: 13,
+                    color: "#55505E",
+                  }}
+                >
                   {r.reader}
                 </div>
               </div>
@@ -585,16 +840,57 @@ export function App() {
           </div>
         </div>
 
-        <h3 style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 12, letterSpacing: "0.14em", textTransform: "uppercase", color: "#55505E", margin: "34px 0 14px" }}>
+        <h3
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: 12,
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            color: "#55505E",
+            margin: "34px 0 14px",
+          }}
+        >
           All 24 tones
         </h3>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 148px), 1fr))", gap: 10 }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns:
+              "repeat(auto-fill, minmax(min(100%, 148px), 1fr))",
+            gap: 10,
+          }}
+        >
           {Object.entries(tone).map(([name, hex]) => (
-            <div key={name} style={{ border: "1px solid #E6E2EC", borderRadius: 14, overflow: "hidden", background: "#FFFFFF" }}>
+            <div
+              key={name}
+              style={{
+                border: "1px solid #E6E2EC",
+                borderRadius: 14,
+                overflow: "hidden",
+                background: "#FFFFFF",
+              }}
+            >
               <div style={{ height: 52, background: hex }} />
               <div style={{ padding: "9px 11px" }}>
-                <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 11.5, fontWeight: 600 }}>{name}</div>
-                <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 10.5, color: "#8A8494", marginTop: 2 }}>{hex}</div>
+                <div
+                  style={{
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: 11.5,
+                    fontWeight: 600,
+                  }}
+                >
+                  {name}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: 10.5,
+                    color: "#8A8494",
+                    marginTop: 2,
+                  }}
+                >
+                  {hex}
+                </div>
               </div>
             </div>
           ))}
@@ -602,25 +898,83 @@ export function App() {
       </section>
 
       {/* GUIDANCE */}
-      <section id="guidance" style={{ maxWidth: 1240, margin: "0 auto", padding: "80px clamp(20px, 5vw, 56px) 0", scrollMarginTop: 20 }}>
+      <section
+        id="guidance"
+        style={{
+          maxWidth: 1240,
+          margin: "0 auto",
+          padding: "80px clamp(20px, 5vw, 56px) 0",
+          scrollMarginTop: 20,
+        }}
+      >
         <h2 style={sectionHeadingStyle}>Guidance</h2>
         <p style={{ ...sectionBodyStyle, marginBottom: 32 }}>
-          The part prop tables can't tell you. Each pair is a real mistake the old palette made easy.
+          The part prop tables can't tell you. Each pair is a real mistake the
+          old palette made easy.
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))", gap: 18 }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
+            gap: 18,
+          }}
+        >
           {GUIDANCE.map((g) => (
-            <div key={g.title} style={{ background: "#FFFFFF", border: "1px solid #E6E2EC", borderRadius: 20, padding: 24 }}>
-              <h3 style={{ fontFamily: "'IBM Plex Sans Condensed', sans-serif", fontSize: 22, fontWeight: 600, letterSpacing: "-0.015em", margin: "0 0 16px" }}>
+            <div
+              key={g.title}
+              style={{
+                background: "#FFFFFF",
+                border: "1px solid #E6E2EC",
+                borderRadius: 20,
+                padding: 24,
+              }}
+            >
+              <h3
+                style={{
+                  fontFamily: "'IBM Plex Sans Condensed', sans-serif",
+                  fontSize: 22,
+                  fontWeight: 600,
+                  letterSpacing: "-0.015em",
+                  margin: "0 0 16px",
+                }}
+              >
                 {g.title}
               </h3>
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                <div style={{ display: "flex", gap: 11, alignItems: "flex-start" }}>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: 12 }}
+              >
+                <div
+                  style={{ display: "flex", gap: 11, alignItems: "flex-start" }}
+                >
                   <span style={pillLabelStyle("#E7FBF0", "#0E5E3C")}>DO</span>
-                  <p style={{ fontSize: 15, lineHeight: 1.5, margin: 0, color: "#3A3542" }}>{g.doText}</p>
+                  <p
+                    style={{
+                      fontSize: 15,
+                      lineHeight: 1.5,
+                      margin: 0,
+                      color: "#3A3542",
+                    }}
+                  >
+                    {g.doText}
+                  </p>
                 </div>
-                <div style={{ display: "flex", gap: 11, alignItems: "flex-start" }}>
-                  <span style={pillLabelStyle("#FFE4EC", "#A8123A")}>DON'T</span>
-                  <p style={{ fontSize: 15, lineHeight: 1.5, margin: 0, color: "#3A3542" }}>{g.dontText}</p>
+                <div
+                  style={{ display: "flex", gap: 11, alignItems: "flex-start" }}
+                >
+                  <span style={pillLabelStyle("#FFE4EC", "#A8123A")}>
+                    DON'T
+                  </span>
+                  <p
+                    style={{
+                      fontSize: 15,
+                      lineHeight: 1.5,
+                      margin: 0,
+                      color: "#3A3542",
+                    }}
+                  >
+                    {g.dontText}
+                  </p>
                 </div>
               </div>
             </div>
@@ -629,10 +983,19 @@ export function App() {
       </section>
 
       {/* THINKING */}
-      <section id="thinking" style={{ maxWidth: 1240, margin: "0 auto", padding: "80px clamp(20px, 5vw, 56px) 0", scrollMarginTop: 20 }}>
+      <section
+        id="thinking"
+        style={{
+          maxWidth: 1240,
+          margin: "0 auto",
+          padding: "80px clamp(20px, 5vw, 56px) 0",
+          scrollMarginTop: 20,
+        }}
+      >
         <h2 style={sectionHeadingStyle}>The thinking</h2>
         <p style={{ ...sectionBodyStyle, marginBottom: 32 }}>
-          Three decisions worth arguing about, and why they went the way they did.
+          Three decisions worth arguing about, and why they went the way they
+          did.
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           {ESSAYS.map((e) => (
@@ -644,22 +1007,59 @@ export function App() {
                 background: e.bg,
                 border: "1px solid rgba(26,23,32,0.08)",
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
+                gridTemplateColumns:
+                  "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
                 gap: 28,
                 alignItems: "start",
               }}
             >
               <div>
-                <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "#55505E", marginBottom: 12 }}>
+                <div
+                  style={{
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: 11,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: "#55505E",
+                    marginBottom: 12,
+                  }}
+                >
                   {e.kicker}
                 </div>
-                <h3 style={{ fontFamily: "'IBM Plex Sans Condensed', sans-serif", fontSize: 30, fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1.08, margin: 0 }}>
+                <h3
+                  style={{
+                    fontFamily: "'IBM Plex Sans Condensed', sans-serif",
+                    fontSize: 30,
+                    fontWeight: 600,
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1.08,
+                    margin: 0,
+                  }}
+                >
                   {e.title}
                 </h3>
               </div>
               <div>
-                <p style={{ fontSize: 16.5, lineHeight: 1.6, margin: "0 0 14px", color: "#3A3542" }}>{e.body}</p>
-                <p style={{ fontSize: 16.5, lineHeight: 1.6, margin: 0, fontWeight: 500 }}>{e.punch}</p>
+                <p
+                  style={{
+                    fontSize: 16.5,
+                    lineHeight: 1.6,
+                    margin: "0 0 14px",
+                    color: "#3A3542",
+                  }}
+                >
+                  {e.body}
+                </p>
+                <p
+                  style={{
+                    fontSize: 16.5,
+                    lineHeight: 1.6,
+                    margin: 0,
+                    fontWeight: 500,
+                  }}
+                >
+                  {e.punch}
+                </p>
               </div>
             </article>
           ))}
@@ -667,24 +1067,49 @@ export function App() {
       </section>
 
       {/* CTA */}
-      <section style={{ maxWidth: 1240, margin: "80px auto 0", padding: "0 clamp(20px, 5vw, 56px)" }}>
+      <section
+        style={{
+          maxWidth: 1240,
+          margin: "80px auto 0",
+          padding: "0 clamp(20px, 5vw, 56px)",
+        }}
+      >
         <div
           style={{
             background: "#1A1720",
             borderRadius: 28,
             padding: "clamp(32px, 6vw, 64px)",
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
             gap: 40,
             alignItems: "center",
           }}
         >
           <div>
-            <h2 style={{ fontFamily: "'IBM Plex Sans Condensed', sans-serif", fontSize: "clamp(30px, 4vw, 44px)", fontWeight: 600, letterSpacing: "-0.025em", lineHeight: 1.02, margin: "0 0 14px", color: "#FFFFFF" }}>
+            <h2
+              style={{
+                fontFamily: "'IBM Plex Sans Condensed', sans-serif",
+                fontSize: "clamp(30px, 4vw, 44px)",
+                fontWeight: 600,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.02,
+                margin: "0 0 14px",
+                color: "#FFFFFF",
+              }}
+            >
               Install it, theme it, ship.
             </h2>
-            <p style={{ fontSize: 17, lineHeight: 1.55, margin: 0, color: "#B8B2C4" }}>
-              One provider, one data attribute, and every component follows. Reader mode included.
+            <p
+              style={{
+                fontSize: 17,
+                lineHeight: 1.55,
+                margin: 0,
+                color: "#B8B2C4",
+              }}
+            >
+              One provider, one data attribute, and every component follows.
+              Reader mode included.
             </p>
           </div>
           <pre
@@ -700,7 +1125,7 @@ export function App() {
               borderRadius: 16,
             }}
           >
-{`npm i electrocute-ui
+            {`npm i electrocute-ui
 
 import { ThemeProvider, Button }
   from "electrocute-ui";
@@ -715,11 +1140,36 @@ import { ThemeProvider, Button }
       </section>
 
       {/* FOOTER */}
-      <footer style={{ maxWidth: 1240, margin: "0 auto", padding: "44px clamp(20px, 5vw, 56px) 64px", display: "flex", flexWrap: "wrap", gap: 18, justifyContent: "space-between", alignItems: "center" }}>
-        <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 12.5, color: "#8A8494" }}>
+      <footer
+        style={{
+          maxWidth: 1240,
+          margin: "0 auto",
+          padding: "44px clamp(20px, 5vw, 56px) 64px",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 18,
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: 12.5,
+            color: "#8A8494",
+          }}
+        >
           electrocute-ui · Electrocute Lab
         </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 18, fontFamily: "'IBM Plex Mono', monospace", fontSize: 12.5 }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 18,
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: 12.5,
+          }}
+        >
           <a href="https://github.com/yafira/electrocute-ui">GitHub</a>
           <a href="https://www.npmjs.com/package/electrocute-ui">npm</a>
           <a href="/storybook/">Storybook</a>
@@ -733,17 +1183,42 @@ import { ThemeProvider, Button }
 function Stat({ big, body }: { big: string; body: React.ReactNode }) {
   return (
     <div>
-      <div style={{ fontFamily: "'IBM Plex Sans Condensed', sans-serif", fontSize: 44, fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1 }}>
+      <div
+        style={{
+          fontFamily: "'IBM Plex Sans Condensed', sans-serif",
+          fontSize: 44,
+          fontWeight: 600,
+          letterSpacing: "-0.03em",
+          lineHeight: 1,
+        }}
+      >
         {big}
       </div>
-      <p style={{ fontSize: 16, lineHeight: 1.55, color: "#3A3542", margin: "12px 0 0" }}>{body}</p>
+      <p
+        style={{
+          fontSize: 16,
+          lineHeight: 1.55,
+          color: "#3A3542",
+          margin: "12px 0 0",
+        }}
+      >
+        {body}
+      </p>
     </div>
   );
 }
 
 function Code({ children }: { children: React.ReactNode }) {
   return (
-    <code style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 14, background: "#F4F0FF", padding: "1px 5px", borderRadius: 4 }}>
+    <code
+      style={{
+        fontFamily: "'IBM Plex Mono', monospace",
+        fontSize: 14,
+        background: "#F4F0FF",
+        padding: "1px 5px",
+        borderRadius: 4,
+      }}
+    >
       {children}
     </code>
   );
