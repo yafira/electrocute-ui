@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Avatar } from "./Avatar";
+import { inkbloomDataUri } from "../Inkbloom/inkbloom-data";
 
 const meta: Meta<typeof Avatar> = {
   title: "Components/Avatar",
@@ -39,8 +40,8 @@ export const Tones: Story = {
 
 export const WithImage: Story = {
   args: {
-    src: "https://i.pravatar.cc/100?img=47",
-    alt: "Example user",
+    src: inkbloomDataUri,
+    alt: "Electrocute Lab",
   },
 };
 

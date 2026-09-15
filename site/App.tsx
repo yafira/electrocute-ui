@@ -6,8 +6,10 @@ import {
   Input,
   Switch,
   Checkbox,
+  Inkbloom,
   tone,
 } from "../src";
+import "../src/theme/theme.css";
 
 /**
  * electrocute-ui docs site — "design system, actually running."
@@ -396,7 +398,9 @@ export function App() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <div style={{ width: 26, height: 26, borderRadius: 8, background: tone["lavender-beam"], border: "1.5px solid #1A1720" }} />
+          <div style={{ width: 26, height: 26, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 8, background: tone["lavender-beam"], border: "1.5px solid #1A1720" }}>
+            <Inkbloom size="sm" />
+          </div>
           <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 15, fontWeight: 600, letterSpacing: "-0.01em" }}>
             electrocute-ui
           </span>
