@@ -1,4 +1,4 @@
-export { tone, color, ink, status, accent, roles, cssVar } from './colors'
+export { tone, color, ink, status, accent, roles, themeNames, cssVar } from './colors'
 export type { Tone, StatusName, ThemeName, RoleTokens } from './colors'
 export { font, fontWeight, fontSize, lineHeight, letterSpacing, textStyle } from './typography'
 export type { TypeStyle } from './typography'

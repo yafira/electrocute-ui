@@ -80,6 +80,63 @@
   --ecu-disabled-ink: #595959;
 }
 
+/* mono: neutrals first, one hint of peony-fizz, plex mono everywhere */
+[data-ecu-theme='mono-light'] {
+  --ecu-canvas: #ffffff;
+  --ecu-surface: #ffffff;
+  --ecu-surface-sunken: #f6f6f4;
+  --ecu-surface-accent: #fff3f8;
+  --ecu-ink: #111111;
+  --ecu-ink-muted: #5c5c58;
+  --ecu-ink-subtle: #8a8a85;
+  --ecu-accent: #f2b9e0;
+  --ecu-accent-hover: #e9a6d3;
+  --ecu-accent-ink: #111111;
+  --ecu-line: #dcdcd8;
+  --ecu-line-strong: #111111;
+  --ecu-focus: #111111;
+
+  --ecu-success-surface: #e7fbf0; --ecu-success-ink: #0e5e3c;
+  --ecu-warning-surface: #fffae0; --ecu-warning-ink: #7a4f00;
+  --ecu-danger-surface: #ffe4ec;  --ecu-danger-ink: #a8123a;
+  --ecu-info-surface: #ecf3fe;    --ecu-info-ink: #1b4fa8;
+
+  --ecu-disabled-surface: #ececea;
+  --ecu-disabled-ink: #8a8a85;
+}
+
+/* pastels stay light on black, so accent-ink stays near-black */
+[data-ecu-theme='mono-dark'] {
+  --ecu-canvas: #000000;
+  --ecu-surface: #000000;
+  --ecu-surface-sunken: #111111;
+  --ecu-surface-accent: #1c171a;
+  --ecu-ink: #f5f5f3;
+  --ecu-ink-muted: #a3a3a0;
+  --ecu-ink-subtle: #6e6e6b;
+  --ecu-accent: #f2b9e0;
+  --ecu-accent-hover: #f7cde8;
+  --ecu-accent-ink: #111111;
+  --ecu-line: #2a2a2a;
+  --ecu-line-strong: #6e6e6b;
+  --ecu-focus: #f5f5f3;
+
+  --ecu-success-surface: #13301f; --ecu-success-ink: #7be3ae;
+  --ecu-warning-surface: #302713; --ecu-warning-ink: #f0ce7b;
+  --ecu-danger-surface: #33131f;  --ecu-danger-ink: #f79bb8;
+  --ecu-info-surface: #131f33;    --ecu-info-ink: #9bc1f7;
+
+  --ecu-disabled-surface: #1c1c1c;
+  --ecu-disabled-ink: #6e6e6b;
+}
+
+[data-ecu-theme='mono-light'],
+[data-ecu-theme='mono-dark'] {
+  --ecu-font-display: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+  --ecu-font-body: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+  font-family: var(--ecu-font-body);
+}
+
 /* Reader mode makes every boundary explicit. */
 [data-ecu-theme='accessible'] [data-ecu-component='button'],
 [data-ecu-theme='accessible'] [data-ecu-component='card'],

@@ -4,8 +4,8 @@
  * Sans for body, Plex Mono for labels and code.
  */
 export const font = {
-  display: "'IBM Plex Sans Condensed', system-ui, sans-serif",
-  body: "'IBM Plex Sans', system-ui, -apple-system, sans-serif",
+  display: "var(--ecu-font-display, 'IBM Plex Sans Condensed', system-ui, sans-serif)",
+  body: "var(--ecu-font-body, 'IBM Plex Sans', system-ui, -apple-system, sans-serif)",
   mono: "'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace",
 } as const
 

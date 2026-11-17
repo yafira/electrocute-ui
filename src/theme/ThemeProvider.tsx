@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { tone, type ThemeName } from '../tokens/colors'
+import { tone, themeNames, type ThemeName } from '../tokens/colors'
 import './theme.css'
 
 const STORAGE_KEY = 'ecu-theme'
@@ -25,7 +25,7 @@ function systemTheme(): ThemeName {
 function storedTheme(): ThemeName | null {
   if (typeof window === 'undefined') return null
   const v = window.localStorage.getItem(STORAGE_KEY)
-  return v === 'light' || v === 'dark' || v === 'accessible' ? v : null
+  return themeNames.includes(v as ThemeName) ? (v as ThemeName) : null
 }
 
 export interface ThemeProviderProps {
@@ -82,7 +82,9 @@ export function ThemeProvider({ children, target = 'wrapper', defaultTheme }: Th
   )
 }
 
-const LABELS: Record<ThemeName, string> = { light: 'Light', dark: 'Dark', accessible: 'Reader' }
+const LABELS: Record<ThemeName, string> = {
+  light: 'Light', dark: 'Dark', accessible: 'Reader', 'mono-light': 'Mono', 'mono-dark': 'Mono dark',
+}
 
 export interface ThemeSwitcherProps {
   theme?: ThemeName

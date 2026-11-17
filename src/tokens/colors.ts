@@ -75,7 +75,9 @@ export const accent = {
   dark: '#8A78F0',        // accent surface in the dark theme
 } as const
 
-export type ThemeName = 'light' | 'dark' | 'accessible'
+export type ThemeName = 'light' | 'dark' | 'accessible' | 'mono-light' | 'mono-dark'
+
+export const themeNames: ThemeName[] = ['light', 'dark', 'accessible', 'mono-light', 'mono-dark']
 
 export interface RoleTokens {
   canvas: string
@@ -156,6 +158,46 @@ export const roles: Record<ThemeName, RoleTokens> = {
     'warning-surface': '#FFFFFF', 'warning-ink': '#5C3A00',
     'danger-surface': '#FFFFFF',  'danger-ink': '#8A0026',
     'info-surface': '#FFFFFF',    'info-ink': '#003C8F',
+  },
+  // mono: dieter rams-ish. neutrals first, peony-fizz as the one hint of pastel, plex mono everywhere
+  'mono-light': {
+    canvas: '#FFFFFF',
+    surface: '#FFFFFF',
+    'surface-sunken': '#F6F6F4',
+    'surface-accent': tone['petal-veil'],
+    ink: '#111111',
+    'ink-muted': '#5C5C58',
+    'ink-subtle': '#8A8A85',
+    accent: tone['peony-fizz'],
+    'accent-hover': '#E9A6D3',
+    'accent-ink': '#111111',
+    line: '#DCDCD8',
+    'line-strong': '#111111',
+    focus: '#111111',
+    'success-surface': status.success.surface, 'success-ink': status.success.ink,
+    'warning-surface': status.warning.surface, 'warning-ink': status.warning.ink,
+    'danger-surface': status.danger.surface,   'danger-ink': status.danger.ink,
+    'info-surface': status.info.surface,       'info-ink': status.info.ink,
+  },
+  // pastels stay light on black, so accent-ink stays near-black
+  'mono-dark': {
+    canvas: '#000000',
+    surface: '#000000',
+    'surface-sunken': '#111111',
+    'surface-accent': '#1C171A',
+    ink: '#F5F5F3',
+    'ink-muted': '#A3A3A0',
+    'ink-subtle': '#6E6E6B',
+    accent: tone['peony-fizz'],
+    'accent-hover': '#F7CDE8',
+    'accent-ink': '#111111',
+    line: '#2A2A2A',
+    'line-strong': '#6E6E6B',
+    focus: '#F5F5F3',
+    'success-surface': '#13301F', 'success-ink': '#7BE3AE',
+    'warning-surface': '#302713', 'warning-ink': '#F0CE7B',
+    'danger-surface': '#33131F',  'danger-ink': '#F79BB8',
+    'info-surface': '#131F33',    'info-ink': '#9BC1F7',
   },
 }
 
