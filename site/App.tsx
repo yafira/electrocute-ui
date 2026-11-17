@@ -8,6 +8,9 @@ import {
   Checkbox,
   Inkbloom,
   BloomOutline,
+  Nav,
+  Toggle,
+  Avatar,
   tone,
 } from "../src";
 import "../src/theme/theme.css";
@@ -25,38 +28,114 @@ const THEMES = [
   { key: "light", label: "Light" },
   { key: "dark", label: "Dark" },
   { key: "accessible", label: "Reader" },
+  { key: "mono-light", label: "Mono" },
+  { key: "mono-dark", label: "Mono dark" },
 ] as const;
 
 type ThemeKey = (typeof THEMES)[number]["key"];
 
 // Mirrors theme.css exactly — for the side-by-side role comparison table,
-// where all three themes need to be visible on screen at once.
+// where every theme needs to be visible on screen at once.
 const ROLE_ROWS: {
   role: string;
   light: string;
   dark: string;
   reader: string;
+  mono: string;
+  monoDark: string;
 }[] = [
-  { role: "canvas", light: "#faf9fb", dark: "#141218", reader: "#ffffff" },
-  { role: "surface", light: "#ffffff", dark: "#1e1b24", reader: "#ffffff" },
+  {
+    role: "canvas",
+    light: "#faf9fb",
+    dark: "#141218",
+    reader: "#ffffff",
+    mono: "#ffffff",
+    monoDark: "#000000",
+  },
+  {
+    role: "surface",
+    light: "#ffffff",
+    dark: "#1e1b24",
+    reader: "#ffffff",
+    mono: "#ffffff",
+    monoDark: "#000000",
+  },
   {
     role: "surface.sunken",
     light: "#f5f7f8",
     dark: "#171520",
     reader: "#f2f2f2",
+    mono: "#f6f6f4",
+    monoDark: "#111111",
   },
   {
     role: "surface.accent",
     light: "#faf6ff",
     dark: "#241f33",
     reader: "#ffffff",
+    mono: "#fff3f8",
+    monoDark: "#1c171a",
   },
-  { role: "ink", light: "#1a1720", dark: "#f4f2f8", reader: "#000000" },
-  { role: "ink.muted", light: "#55505e", dark: "#a9a3b8", reader: "#000000" },
-  { role: "accent", light: "#baaeff", dark: "#8a78f0", reader: "#000000" },
-  { role: "accent.ink", light: "#1a1720", dark: "#0d0b12", reader: "#ffffff" },
-  { role: "line", light: "#e6e2ec", dark: "#332e3f", reader: "#000000" },
-  { role: "focus", light: "#5b3fd6", dark: "#b9a9ff", reader: "#000000" },
+  {
+    role: "ink",
+    light: "#1a1720",
+    dark: "#f4f2f8",
+    reader: "#000000",
+    mono: "#111111",
+    monoDark: "#f5f5f3",
+  },
+  {
+    role: "ink.muted",
+    light: "#55505e",
+    dark: "#a9a3b8",
+    reader: "#000000",
+    mono: "#5c5c58",
+    monoDark: "#a3a3a0",
+  },
+  {
+    role: "accent",
+    light: "#baaeff",
+    dark: "#8a78f0",
+    reader: "#000000",
+    mono: "#f2b9e0",
+    monoDark: "#f2b9e0",
+  },
+  {
+    role: "accent.ink",
+    light: "#1a1720",
+    dark: "#0d0b12",
+    reader: "#ffffff",
+    mono: "#111111",
+    monoDark: "#111111",
+  },
+  {
+    role: "line",
+    light: "#e6e2ec",
+    dark: "#332e3f",
+    reader: "#000000",
+    mono: "#dcdcd8",
+    monoDark: "#2a2a2a",
+  },
+  {
+    role: "focus",
+    light: "#5b3fd6",
+    dark: "#b9a9ff",
+    reader: "#000000",
+    mono: "#111111",
+    monoDark: "#f5f5f3",
+  },
+];
+
+const navIcon = (d: string) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+    <path d={d} />
+  </svg>
+);
+
+const NAV_ITEMS = [
+  { id: "home", label: "Home", icon: navIcon("M4 11l8-7 8 7v9H4z") },
+  { id: "work", label: "Work", icon: navIcon("M4 7h16v12H4zM9 7V4h6v3") },
+  { id: "about", label: "About", icon: navIcon("M12 12a4 4 0 100-8 4 4 0 000 8zM4 21a8 8 0 0116 0") },
 ];
 
 const GUIDANCE = [
@@ -112,7 +191,7 @@ const ESSAYS = [
     title: "Tokens should be build output",
     body: "src/tokens was hand-sampled from Figma, and it already carries a comment flagging two swatches that look like a copy-paste artifact. Hand-maintained tokens drift the moment anyone touches the file they came from.",
     punch:
-      "v0.7 generates tokens from a Figma Tokens export in CI. Until then, the comment stays — an honest note beats a silent wrong value.",
+      "A later release generates tokens from a Figma Tokens export in CI. Until then, the comment stays — an honest note beats a silent wrong value.",
     bg: "#FFF4E8",
   },
 ];
@@ -164,6 +243,8 @@ function CopyInstall() {
 function ComponentsShowcase() {
   const [theme, setTheme] = useState<ThemeKey>("light");
   const [switchOn, setSwitchOn] = useState(true);
+  const [toggleOn, setToggleOn] = useState(false);
+  const [navActive, setNavActive] = useState("home");
 
   return (
     <div>
@@ -256,7 +337,7 @@ function ComponentsShowcase() {
             <Card interactive surface="accent">
               <div
                 style={{
-                  fontFamily: "'IBM Plex Sans Condensed', sans-serif",
+                  fontFamily: "var(--ecu-font-display, 'IBM Plex Sans Condensed', sans-serif)",
                   fontSize: 22,
                   fontWeight: 600,
                   letterSpacing: "-0.015em",
@@ -287,43 +368,36 @@ function ComponentsShowcase() {
             </div>
           </ShowcaseTile>
 
-          <ShowcaseTile label="Nav">
-            <div
-              style={{
-                display: "flex",
-                gap: 6,
-                padding: 6,
-                borderRadius: 999,
-                background: "var(--ecu-surface-sunken)",
-              }}
-            >
-              {["Aa", "Bb", "Cc", "Dd"].map((glyph, i) => (
-                <div
-                  key={glyph}
-                  style={{
-                    width: 38,
-                    height: 38,
-                    borderRadius: 999,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: "'IBM Plex Mono', monospace",
-                    fontSize: 13,
-                    fontWeight: 600,
-                    background: i === 0 ? "var(--ecu-accent)" : "transparent",
-                    color:
-                      i === 0
-                        ? "var(--ecu-accent-ink)"
-                        : "var(--ecu-ink-muted)",
-                  }}
-                >
-                  {glyph}
-                </div>
+          <ShowcaseTile label="Nav · light, outline, dark">
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+              {(["light", "outline", "dark"] as const).map((t) => (
+                <Nav
+                  key={t}
+                  theme={t}
+                  items={NAV_ITEMS}
+                  activeId={navActive}
+                  onSelect={setNavActive}
+                />
               ))}
             </div>
           </ShowcaseTile>
 
-          <ShowcaseTile label="Inkbloom · BloomOutline" badge="not themed yet">
+          <ShowcaseTile label="Toggle · Avatar">
+            <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+              <Toggle
+                checked={toggleOn}
+                onChange={setToggleOn}
+                label="Dark mode"
+              />
+              <div style={{ display: "flex", gap: 8 }}>
+                <Avatar initials="YM" tone="lavender-beam" />
+                <Avatar initials="EL" tone="peony-fizz" />
+                <Avatar initials="EC" tone="pistachio-swirl" />
+              </div>
+            </div>
+          </ShowcaseTile>
+
+          <ShowcaseTile label="Inkbloom · BloomOutline">
             <div
               style={{
                 borderRadius: 14,
@@ -333,13 +407,13 @@ function ComponentsShowcase() {
                 justifyContent: "center",
                 gap: 24,
                 padding: 14,
-                border: "1px dashed var(--ecu-line)",
-                backgroundImage:
-                  "repeating-linear-gradient(135deg, rgba(186,174,255,0.22) 0 6px, transparent 6px 12px)",
+                // the marks sit on the pastel world in every theme
+                background: tone["mochi-cream"],
+                color: "#1A1720",
               }}
             >
               <Inkbloom size="lg" />
-              <BloomOutline size="lg" color="var(--ecu-ink)" />
+              <BloomOutline size="lg" />
             </div>
             <p
               style={{
@@ -349,16 +423,8 @@ function ComponentsShowcase() {
                 color: "var(--ecu-ink-muted)",
               }}
             >
-              The generative pair still paints its own colors instead of reading{" "}
-              <code
-                style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: 13,
-                }}
-              >
-                --ecu-accent
-              </code>
-              . Retrofit lands in v0.7.
+              Marks, not themed: the inkbloom is always black on the pastel
+              world, and the outline takes the text colour around it.
             </p>
           </ShowcaseTile>
 
@@ -520,7 +586,7 @@ export function App() {
               fontWeight: 600,
             }}
           >
-            v0.5
+            v0.7
           </span>
         </div>
         <nav
@@ -713,8 +779,8 @@ export function App() {
             }
           />
           <Stat
-            big="3 themes"
-            body="Light, dark, and reader — a blunt high-contrast mode for genuine accessibility needs, not a third color scheme."
+            big="5 themes"
+            body="Light, dark, reader, and two mono themes. Reader is a blunt high-contrast mode for genuine accessibility needs; mono is white or black with one hint of peony-fizz, all in Plex Mono."
           />
           <Stat
             big="4.5:1 floor"
@@ -765,15 +831,15 @@ export function App() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "190px 1fr 1fr 1fr",
+              gridTemplateColumns: "190px repeat(5, 1fr)",
               gap: 1,
-              minWidth: 700,
+              minWidth: 940,
               background: "#E6E2EC",
               borderRadius: 14,
               overflow: "hidden",
             }}
           >
-            {["Role", "Light", "Dark", "Reader"].map((h) => (
+            {["Role", "Light", "Dark", "Reader", "Mono", "Mono dark"].map((h) => (
               <div
                 key={h}
                 style={{
@@ -802,39 +868,33 @@ export function App() {
                 >
                   {r.role}
                 </div>
-                <div
-                  style={{
-                    background: "#FFFFFF",
-                    padding: "13px 16px",
-                    fontFamily: "'IBM Plex Mono', monospace",
-                    fontSize: 13,
-                    color: "#55505E",
-                  }}
-                >
-                  {r.light}
-                </div>
-                <div
-                  style={{
-                    background: "#FFFFFF",
-                    padding: "13px 16px",
-                    fontFamily: "'IBM Plex Mono', monospace",
-                    fontSize: 13,
-                    color: "#55505E",
-                  }}
-                >
-                  {r.dark}
-                </div>
-                <div
-                  style={{
-                    background: "#FFFFFF",
-                    padding: "13px 16px",
-                    fontFamily: "'IBM Plex Mono', monospace",
-                    fontSize: 13,
-                    color: "#55505E",
-                  }}
-                >
-                  {r.reader}
-                </div>
+                {[r.light, r.dark, r.reader, r.mono, r.monoDark].map((v, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      background: "#FFFFFF",
+                      padding: "13px 16px",
+                      fontFamily: "'IBM Plex Mono', monospace",
+                      fontSize: 13,
+                      color: "#55505E",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: 12,
+                        height: 12,
+                        borderRadius: 3,
+                        background: v,
+                        border: "1px solid #E6E2EC",
+                        flexShrink: 0,
+                      }}
+                    />
+                    {v}
+                  </div>
+                ))}
               </div>
             ))}
           </div>
@@ -1109,7 +1169,7 @@ export function App() {
               }}
             >
               One provider, one data attribute, and every component follows.
-              Reader mode included.
+              Reader and mono included.
             </p>
           </div>
           <pre
