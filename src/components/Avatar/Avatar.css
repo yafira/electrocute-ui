@@ -5,9 +5,10 @@
   border-radius: 999px;
   overflow: hidden;
   flex-shrink: 0;
-  font-family: "IBM Plex Sans Condensed", sans-serif;
+  font-family: var(--ecu-font-display, "IBM Plex Sans Condensed", sans-serif);
   font-weight: 700;
-  color: #363333;
+  /* tints stay pastel in every theme, so the initials stay dark too (ink 900) */
+  color: #1a1720;
 }
 
 .ecu-avatar__img {
@@ -24,3 +25,10 @@
 .ecu-avatar--peony-fizz { background: #FAE7EF; }
 .ecu-avatar--marzipan-cloud { background: #FFFAE0; }
 .ecu-avatar--pistachio-swirl { background: #EAF9D2; }
+
+/* reader mode: no tints, hard edge */
+[data-ecu-theme='accessible'] .ecu-avatar {
+  background: var(--ecu-surface);
+  color: var(--ecu-ink);
+  border: 2px solid var(--ecu-line);
+}

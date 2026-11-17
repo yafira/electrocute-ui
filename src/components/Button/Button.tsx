@@ -45,6 +45,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   const [hover, setHover] = React.useState(false)
   const c = intents[intent]
   const isOff = disabled || loading
+  // disabled gets its own roles; loading keeps its colour and just dims
+  const isDisabled = !!disabled && !loading
 
   // A tone override swaps only the accent role for this element.
   const toneVars = tone
@@ -78,11 +80,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         gap: space[2],
         cursor: isOff ? 'not-allowed' : 'pointer',
         width: fullWidth ? '100%' : undefined,
-        opacity: isOff ? 0.55 : 1,
+        opacity: loading ? 0.7 : 1,
         transition: `background ${motion.fast}, transform ${motion.fast}`,
         ...sizes[size],
         ...(variant === 'pill' ? { borderRadius: radius.pill } : null),
         ...variantStyle,
+        ...(isDisabled
+          ? {
+              background: variant === 'ghost' ? 'transparent' : 'var(--ecu-disabled-surface)',
+              color: 'var(--ecu-disabled-ink)',
+              border: `1.5px solid ${variant === 'outline' ? 'var(--ecu-line)' : 'transparent'}`,
+            }
+          : null),
         ...(toneVars as React.CSSProperties),
         ...style,
       }}

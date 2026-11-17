@@ -16,7 +16,7 @@
   border: none;
   background: transparent;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: background-color 120ms cubic-bezier(0.2, 0, 0.2, 1), color 120ms cubic-bezier(0.2, 0, 0.2, 1);
 }
 
 .ecu-nav__item svg {
@@ -24,42 +24,40 @@
   height: 18px;
 }
 
-/* light theme — plain, no border, sits on page background */
+/* light: plain, sits on the page */
 .ecu-nav--light {
   background: transparent;
 }
 .ecu-nav--light .ecu-nav__item {
-  color: #353333;
+  color: var(--ecu-ink);
 }
 .ecu-nav--light .ecu-nav__item--active {
-  background: #E2DFFC;
+  background: var(--ecu-accent);
+  color: var(--ecu-accent-ink);
 }
 
-/* outline theme — bordered pill */
+/* outline: bordered pill */
 .ecu-nav--outline {
-  border: 1.5px solid #353333;
-  background: #ffffff;
+  border: 1.5px solid var(--ecu-line-strong);
+  background: var(--ecu-surface);
 }
 .ecu-nav--outline .ecu-nav__item {
-  color: #353333;
+  color: var(--ecu-ink);
 }
 .ecu-nav--outline .ecu-nav__item--active {
-  background: #F0EFEC;
+  background: var(--ecu-surface-sunken);
 }
 
-/* dark theme — filled dark pill, white active circle */
+/* dark: the inverse pill. ink fill, surface icons, so it flips with the theme */
 .ecu-nav--dark {
-  background: #1a1a1a;
+  background: var(--ecu-ink);
 }
 .ecu-nav--dark .ecu-nav__item {
-  color: #ffffff;
+  color: var(--ecu-surface);
 }
 .ecu-nav--dark .ecu-nav__item--active {
-  background: #ffffff;
-  color: #1a1a1a;
+  background: var(--ecu-surface);
+  color: var(--ecu-ink);
 }
 
-.ecu-nav__item:focus-visible {
-  outline: 2px solid #8b8ee0;
-  outline-offset: 2px;
-}
+/* focus comes from the library-wide ring in theme.css */

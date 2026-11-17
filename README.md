@@ -18,7 +18,7 @@ v0.5 is additive: `tone` still works everywhere it worked in v0.4 — it just st
 - **`ThemeProvider` / `useTheme` / `ThemeSwitcher`** — light, dark, and reader (accessible/high-contrast) modes, driven by `data-ecu-theme` and CSS custom properties. `ThemeSwitcher` is now context-aware: pass `theme`/`onThemeChange` explicitly, or omit them and it reads from the nearest `ThemeProvider`
 - **`tokens`** — three layers now, in dependency order: `tone` (24 brand pastels, decorative source), `ink`/`status`/`accent` (functional ramps, new in v0.5), and `roles` (semantic names per theme — the only layer components are allowed to read)
 
-**Still on v0.4, deferred to v0.6/v0.7:** `Nav`, `Toggle`, `Avatar`, `Inkbloom`, `BloomOutline`. These still paint their own colors instead of reading `--ecu-accent` — they're unaffected by this release, not broken by it.
+**Retrofitted in v0.7:** `Nav`, `Toggle` and `Avatar` now read role tokens, so they follow every theme. `Nav`'s `dark` variant is now the inverse pill (ink fill, surface icons) and flips with the theme. `Inkbloom` and `BloomOutline` are marks, not themed: the inkbloom is always black, and the outline takes `currentColor`.
 
 ### tone → intent migration
 
@@ -64,6 +64,8 @@ function Controls() {
 `ThemeProvider` defaults to the system color-scheme preference and persists the person's explicit choice to localStorage. Pass `target="document"` to apply `data-ecu-theme` to `<html>` instead of a wrapper div, if you're theming a whole app rather than an embedded widget.
 
 Reader mode (`theme="accessible"`) is a deliberately blunt, high-contrast override — black text, white surfaces, visible borders, zero tint — rather than a themed variant of the pastel palette. It's a legibility floor for genuine accessibility needs, not a fourth color scheme.
+
+Mono (`theme="mono-light"` / `theme="mono-dark"`) is the quiet one: white or black, neutrals first, `peony-fizz` as the single hint of pastel, and IBM Plex Mono for everything. Components pick up the face through `--ecu-font-display` and `--ecu-font-body`, so nothing else changes.
 
 ## Roles vs. tones
 
@@ -189,7 +191,6 @@ If the palette changes in Figma, `src/tokens` won't auto-sync — either hand-ed
 
 ## Roadmap
 
-- **v0.6/v0.7** — retrofit `Nav`, `Toggle`, `Avatar`, `Inkbloom`, and `BloomOutline` onto the role token system; `Nav`'s `light`/`outline`/`dark` prop predates the theme system and doesn't read `data-ecu-theme` yet
 - Generate `src/tokens` from a Figma Tokens export in CI; add automated contrast checks to PRs
 - Verify the `ink`/`status`/`accent` proposal values against the live Figma file
 - Icon set as its own package or subpath export
