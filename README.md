@@ -4,9 +4,20 @@
 [![license](https://img.shields.io/npm/l/electrocute-ui.svg)](https://github.com/yafira/electrocute-ui/blob/main/LICENSE)
 [![Storybook](https://img.shields.io/badge/Storybook-live-ff4785?logo=storybook&logoColor=white)](https://ui.electrocute.io/storybook/)
 
-The React component library and design system for [Electrocute Lab](https://electrocute.io) — design tokens, components (Button, Card, Field, Input, Badge, Nav), and a live Storybook.
+The React component library and design system for [Electrocute Lab](https://electrocute.io) — design tokens, components (Button, Card, Field, Input, Badge, Nav, Toggle, Avatar), five themes, and a live Storybook.
 
-## What's in v0.5
+## What's in v0.7
+
+v0.7 is additive too: nothing from v0.5 was removed or renamed.
+
+- **Two new themes: Mono and Mono dark** (`mono-light` / `mono-dark`). Dieter Rams-quiet: white or black, neutrals first, `peony-fizz` as the one hint of pastel, and IBM Plex Mono for everything. `ThemeSwitcher` now shows five options
+- **Font variables.** Headings and body read `--ecu-font-display` and `--ecu-font-body` (falling back to Plex Sans Condensed and Plex Sans), so a theme can swap the typeface without touching components. If you use the mono themes, load `IBM Plex Mono` 400/500/600
+- **`Nav`, `Toggle` and `Avatar` now follow the theme.** They read role tokens instead of their own hex values. `Nav`'s `dark` variant is now the inverse pill (ink fill, surface icons) and flips with the theme; `Toggle`'s thumb keeps an edge so it stays visible on dark themes; `Avatar` initials stay dark on its pastel tints, and reader mode drops the tint for a bordered surface
+- **Disabled buttons use the disabled roles** (`disabled-surface` / `disabled-ink`) instead of dimming their colour. A `loading` button keeps its colour and dims
+- **`themeNames`** is exported from `tokens`: the list of every theme, handy for your own switchers
+- `Inkbloom` and `BloomOutline` are marks, not themed: the inkbloom is always black, and the outline takes `currentColor`
+
+## What came in v0.5
 
 v0.5 is additive: `tone` still works everywhere it worked in v0.4 — it just stops being the *primary* API. The new API is **roles, not tones** — components name what a color *means* (`accent`, `surface`, `ink.muted`), and the active theme resolves that to a hex value. Nothing from v0.4 was deleted; a role layer went on top.
 
@@ -15,10 +26,8 @@ v0.5 is additive: `tone` still works everywhere it worked in v0.4 — it just st
 - **`Field`** — new in v0.5: the shared label/hint/error/aria shell every form control uses. Most consumers won't reach for it directly — `Input`, `Textarea`, `Select`, `Checkbox`, `Radio`, and `Switch` already wrap it
 - **`Input` / `Textarea` / `Select` / `Checkbox` / `Radio` / `Switch`** — text field, multiline, dropdown, and choice controls, all wired to `Field` for consistent labeling and error states
 - **`Badge`** — `intent` (neutral / success / warning / danger / info). `tone` was removed entirely in v0.5, not deprecated — see migration below
-- **`ThemeProvider` / `useTheme` / `ThemeSwitcher`** — light, dark, and reader (accessible/high-contrast) modes, driven by `data-ecu-theme` and CSS custom properties. `ThemeSwitcher` is now context-aware: pass `theme`/`onThemeChange` explicitly, or omit them and it reads from the nearest `ThemeProvider`
+- **`ThemeProvider` / `useTheme` / `ThemeSwitcher`** — light, dark, and reader (accessible/high-contrast) modes (mono and mono dark joined in v0.7), driven by `data-ecu-theme` and CSS custom properties. `ThemeSwitcher` is now context-aware: pass `theme`/`onThemeChange` explicitly, or omit them and it reads from the nearest `ThemeProvider`
 - **`tokens`** — three layers now, in dependency order: `tone` (24 brand pastels, decorative source), `ink`/`status`/`accent` (functional ramps, new in v0.5), and `roles` (semantic names per theme — the only layer components are allowed to read)
-
-**Retrofitted in v0.7:** `Nav`, `Toggle` and `Avatar` now read role tokens, so they follow every theme. `Nav`'s `dark` variant is now the inverse pill (ink fill, surface icons) and flips with the theme. `Inkbloom` and `BloomOutline` are marks, not themed: the inkbloom is always black, and the outline takes `currentColor`.
 
 ### tone → intent migration
 
@@ -71,18 +80,18 @@ Mono (`theme="mono-light"` / `theme="mono-dark"`) is the quiet one: white or bla
 
 Roles are the layer you write against day to day — `accent`, `surface`, `surface.sunken`, `ink`, `ink.muted`, `line`, `focus` — and they resolve differently per theme:
 
-| Role              | Light      | Dark       | Reader     |
-| ------------------ | ---------- | ---------- | ---------- |
-| `canvas`           | `#faf9fb`  | `#141218`  | `#ffffff`  |
-| `surface`           | `#ffffff`  | `#1e1b24`  | `#ffffff`  |
-| `surface.sunken`    | `#f5f7f8`  | `#171520`  | `#f2f2f2`  |
-| `surface.accent`    | `#faf6ff`  | `#241f33`  | `#ffffff`  |
-| `ink`               | `#1a1720`  | `#f4f2f8`  | `#000000`  |
-| `ink.muted`         | `#55505e`  | `#a9a3b8`  | `#000000`  |
-| `accent`            | `#baaeff`  | `#8a78f0`  | `#000000`  |
-| `accent.ink`        | `#1a1720`  | `#0d0b12`  | `#ffffff`  |
-| `line`              | `#e6e2ec`  | `#332e3f`  | `#000000`  |
-| `focus`             | `#5b3fd6`  | `#b9a9ff`  | `#000000`  |
+| Role              | Light      | Dark       | Reader     | Mono       | Mono dark  |
+| ------------------ | ---------- | ---------- | ---------- | ---------- | ---------- |
+| `canvas`           | `#faf9fb`  | `#141218`  | `#ffffff`  | `#ffffff`  | `#000000`  |
+| `surface`           | `#ffffff`  | `#1e1b24`  | `#ffffff`  | `#ffffff`  | `#000000`  |
+| `surface.sunken`    | `#f5f7f8`  | `#171520`  | `#f2f2f2`  | `#f6f6f4`  | `#111111`  |
+| `surface.accent`    | `#faf6ff`  | `#241f33`  | `#ffffff`  | `#fff3f8`  | `#1c171a`  |
+| `ink`               | `#1a1720`  | `#f4f2f8`  | `#000000`  | `#111111`  | `#f5f5f3`  |
+| `ink.muted`         | `#55505e`  | `#a9a3b8`  | `#000000`  | `#5c5c58`  | `#a3a3a0`  |
+| `accent`            | `#baaeff`  | `#8a78f0`  | `#000000`  | `#f2b9e0`  | `#f2b9e0`  |
+| `accent.ink`        | `#1a1720`  | `#0d0b12`  | `#ffffff`  | `#111111`  | `#111111`  |
+| `line`              | `#e6e2ec`  | `#332e3f`  | `#000000`  | `#dcdcd8`  | `#2a2a2a`  |
+| `focus`             | `#5b3fd6`  | `#b9a9ff`  | `#000000`  | `#111111`  | `#f5f5f3`  |
 
 Tones are the 24 named pastels underneath — decoration, not semantics. Reach for a role first; use `tone` directly only for genuine one-off decoration, and say so in a comment.
 
