@@ -407,9 +407,13 @@ function ComponentsShowcase() {
                 justifyContent: "center",
                 gap: 24,
                 padding: 14,
-                // the marks sit on the pastel world in every theme
-                background: tone["mochi-cream"],
-                color: "#1A1720",
+                // the marks sit on each theme's accent; reader's accent is black, so it gets the plain surface
+                background:
+                  theme === "accessible" ? "var(--ecu-surface)" : "var(--ecu-accent)",
+                color:
+                  theme === "accessible" ? "var(--ecu-ink)" : "var(--ecu-accent-ink)",
+                border:
+                  theme === "accessible" ? "2px solid var(--ecu-line)" : "none",
               }}
             >
               <Inkbloom size="lg" />
