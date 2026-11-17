@@ -10,6 +10,8 @@ The React component library and design system for [Electrocute Lab](https://elec
 
 v0.7 is additive too: nothing from v0.5 was removed or renamed.
 
+*Why no v0.6?* The 0.6 versions were tagged in git during development but never published to npm, so 0.7 is the release that follows 0.5.2. Nothing was skipped in between.
+
 - **Two new themes: Mono and Mono dark** (`mono-light` / `mono-dark`). Dieter Rams-quiet: white or black, neutrals first, `peony-fizz` as the one hint of pastel, and IBM Plex Mono for everything. `ThemeSwitcher` now shows five options
 - **Font variables.** Headings and body read `--ecu-font-display` and `--ecu-font-body` (falling back to Plex Sans Condensed and Plex Sans), so a theme can swap the typeface without touching components. If you use the mono themes, load `IBM Plex Mono` 400/500/600
 - **`Nav`, `Toggle` and `Avatar` now follow the theme.** They read role tokens instead of their own hex values. `Nav`'s `dark` variant is now the inverse pill (ink fill, surface icons) and flips with the theme; `Toggle`'s thumb keeps an edge so it stays visible on dark themes; `Avatar` initials stay dark on its pastel tints, and reader mode drops the tint for a bordered surface
