@@ -51,7 +51,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yafira/electrocute-ui"
+    "url": "git+https://github.com/yafira/electrocute-ui.git"
   },
   "homepage": "https://ui.electrocute.io"
 }
